@@ -336,34 +336,14 @@
 
       
         
-          
-            <h3 id="Tensorflow-介绍"><a href="#Tensorflow-介绍" class="headerlink" title="Tensorflow 介绍"></a>Tensorflow 介绍</h3><p>Tensorflow是Google发布的人工智能系统.<br>软件可以从大量数据来判断未来情况的趋势.<br>英文官方网站：<br><a href="http://tensorflow.org/" target="_blank" rel="external">http://tensorflow.org/</a></p>
-<p>官方GitHub仓库：<br><a href="https://github.com/tensorflow/tensorflow" target="_blank" rel="external">https://github.com/tensorflow/tensorflow</a></p>
-<p>中文版 GitHub 仓库：<br><a href="https://github.com/jikexueyuanwiki/tensorflow-zh" target="_blank" rel="external">https://github.com/jikexueyuanwiki/tensorflow-zh</a></p>
-<h3 id="Tensorflow-安装"><a href="#Tensorflow-安装" class="headerlink" title="Tensorflow 安装"></a>Tensorflow 安装</h3><p>Tensorflow本身是基于python2/3平台,所以可以直接通过pip进行安装</p>
-<ul>
-<li>建立虚拟环境virtualenv </li>
-</ul>
-<p><code>$ virtualenv -p /usr/local/bin/python3.5 Env3.5</code></p>
-<ul>
-<li>启动虚拟环境</li>
-</ul>
-<p><code>$ source Env3.5/bin/activate</code></p>
-<ul>
-<li>导入安装库(oxs如果没有安装CUDA,只能通过CPU安装)</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># Mac OS X, CPU only, Python 3.4 or 3.5:</div><div class="line">$ export TF_BINARY_URL=https://storage.googleapis.com/tensorflow/mac/cpu/tensorflow-0.11.0rc1-py3-none-any.whl</div></pre></td></tr></table></figure>
-<ul>
-<li>安装tensorflow</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># Python 3</div><div class="line">$ pip3 install --upgrade $TF_BINARY_URL</div></pre></td></tr></table></figure>
-<ul>
-<li>测试Tensorflow<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">$ python</div><div class="line">&gt;&gt;&gt; import tensorflow as tf</div><div class="line">&gt;&gt;&gt; hello = tf.constant(&apos;Hello, TensorFlow!&apos;)</div><div class="line">&gt;&gt;&gt; sess = tf.Session()</div><div class="line">&gt;&gt;&gt; print(sess.run(hello)) Hello, TensorFlow!</div><div class="line">&gt;&gt;&gt; a = tf.constant(10)</div><div class="line">&gt;&gt;&gt; b = tf.constant(32)</div><div class="line">&gt;&gt;&gt; print(sess.run(a + b)) 42</div></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>至此 Tensorflow安装成功</p>
-
-          
+          <h3 id="Tensorflow-介绍"><a href="#Tensorflow-介绍" class="headerlink" title="Tensorflow 介绍"></a>Tensorflow 介绍</h3><p>Tensorflow是Google发布的人工智能系统.<br>软件可以从大量数据来判断未来情况的趋势.<br>英文官方网站：<br><a href="http://tensorflow.org/">http://tensorflow.org/</a></p>
+<p>官方GitHub仓库：<br><a href="https://github.com/tensorflow/tensorflow">https://github.com/tensorflow/tensorflow</a></p>
+<p>中文版 GitHub 仓库：<br><a href="https://github.com/jikexueyuanwiki/tensorflow-zh">https://github.com/jikexueyuanwiki/tensorflow-zh</a></p>
+          <div class="post-more-link text-center">
+            <a class="btn" href="/2016/11/01/Tensorflow学习-一/#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
         
       
     </div>
