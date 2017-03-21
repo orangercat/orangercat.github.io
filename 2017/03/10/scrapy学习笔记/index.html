@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Scrapy," />
 
 
 
@@ -84,15 +84,16 @@
 
 
 
-<meta name="description" content="learn more, try more, do more.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="喵窝">
-<meta property="og:url" content="http://yoursite.com/tags/Ajax/index.html">
+<meta name="description" content="部署Scrapy">
+<meta property="og:type" content="article">
+<meta property="og:title" content="scrapy学习笔记">
+<meta property="og:url" content="http://yoursite.com/2017/03/10/scrapy学习笔记/index.html">
 <meta property="og:site_name" content="喵窝">
-<meta property="og:description" content="learn more, try more, do more.">
+<meta property="og:description" content="部署Scrapy">
+<meta property="og:updated_time" content="2017-03-21T09:51:59.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="喵窝">
-<meta name="twitter:description" content="learn more, try more, do more.">
+<meta name="twitter:title" content="scrapy学习笔记">
+<meta name="twitter:description" content="部署Scrapy">
 
 
 
@@ -113,9 +114,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/Ajax/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/03/10/scrapy学习笔记/"/>
 
-  <title> 标签: Ajax | 喵窝 </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> scrapy学习笔记 | 喵窝 </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -136,7 +137,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-left  ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -234,46 +235,174 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        Ajax
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                scrapy学习笔记
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-03-10T15:16:18+08:00" content="2017-03-10">
+              2017-03-10
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/Python/" itemprop="url" rel="index">
+                    <span itemprop="name">Python</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/03/10/scrapy学习笔记/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/10/scrapy学习笔记/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/03/10/scrapy学习笔记/" class="leancloud_visitors" data-flag-title="scrapy学习笔记">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <h2 id="部署Scrapy"><a href="#部署Scrapy" class="headerlink" title="部署Scrapy"></a>部署Scrapy</h2><a id="more"></a>
+<h2 id="Scrapy架构"><a href="#Scrapy架构" class="headerlink" title="Scrapy架构"></a>Scrapy架构</h2><h2 id="Scrapy使用"><a href="#Scrapy使用" class="headerlink" title="Scrapy使用"></a>Scrapy使用</h2><h4 id="创建项目"><a href="#创建项目" class="headerlink" title="创建项目"></a>创建项目</h4><p>使用<code>scrapy</code>创建项目:<code>scrapy startproject myproject</code></p>
+<h2 id="一些遇到的问题"><a href="#一些遇到的问题" class="headerlink" title="一些遇到的问题"></a>一些遇到的问题</h2><ul>
+<li>extract()函数范围值为list</li>
+<li>item的使用</li>
+</ul>
+<p><strong>按照我的理解,item本质就是个dict,而field的作用是为了对对应的字符串进行赋值而使用.</strong></p>
+<p><code>Field</code>对象完全就是python字典(dict),被用来基于类属性(class attribute)的方法来支持,item可以通过继承item来扩展如果遇到多个list组成的dict来赋值item.目前我考虑到两种方式:</p>
+<pre><code>1. 官方利用dict遍历来实现item的赋值
 
-      <h1 class="post-title">
+    <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">items = []</div><div class="line">for city in city_list:</div><div class="line">    item = items.InsScrapyItem()</div><div class="line">    item[&apos;slug&apos;] = city[&apos;slug&apos;],</div><div class="line">    item[&apos;id&apos;] = city[&apos;id&apos;],</div><div class="line">    item[&apos;name&apos;] = city[&apos;name&apos;],</div><div class="line">    items.append(item)</div></pre></td></tr></table></figure>
+
+    来实现多个item的组合.
+
+    参考代码:[dirbot](https://github.com/scrapy/dirbot)     
+
+
+2. 我考虑到`scrapy.Item`本身就是dict属性,所以考虑直接把city_list赋值给他,似乎也能实现
+</code></pre>
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2016/08/28/Django架构中使用ajax建立checkbox并传输参数/" itemprop="url">
-              
-                <span itemprop="name">Django 架构中使用 ajax 建立 checkbox 并传输参数</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-08-28T13:41:54+08:00"
-              content="2016-08-28" >
-          08-28
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Scrapy/" rel="tag">#Scrapy</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/02/27/在线视频爬虫与百度云盘同步服务及其服务器架设-二/" rel="next" title="在线视频爬虫与百度云盘同步服务及其服务器架设(二)">
+                <i class="fa fa-chevron-left"></i> 在线视频爬虫与百度云盘同步服务及其服务器架设(二)
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -281,6 +410,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/03/10/scrapy学习笔记/"
+           data-title="scrapy学习笔记" data-url="http://yoursite.com/2017/03/10/scrapy学习笔记/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -300,8 +437,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -362,6 +508,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#部署Scrapy"><span class="nav-number">1.</span> <span class="nav-text">部署Scrapy</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scrapy架构"><span class="nav-number">2.</span> <span class="nav-text">Scrapy架构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Scrapy使用"><span class="nav-number">3.</span> <span class="nav-text">Scrapy使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#创建项目"><span class="nav-number">3.0.1.</span> <span class="nav-text">创建项目</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一些遇到的问题"><span class="nav-number">4.</span> <span class="nav-text">一些遇到的问题</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -465,6 +622,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 

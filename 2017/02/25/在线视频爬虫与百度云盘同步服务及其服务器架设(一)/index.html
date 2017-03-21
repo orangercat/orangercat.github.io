@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Django,Python," />
+  <meta name="keywords" content="Python,Django," />
 
 
 
@@ -100,7 +100,7 @@ github地址 : youtube_dl
 利用python管理工具pip安装
 pip install --upgrade youtube-dl
 youtube_dl常用命令行介绍123456789101112131415161718-f, --format FORMAT              Video format code, see">
-<meta property="og:updated_time" content="2017-02-26T03:43:17.000Z">
+<meta property="og:updated_time" content="2017-02-27T03:17:05.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="在线视频爬虫与百度云盘同步服务及其服务器架设(一)">
 <meta name="twitter:description" content="在线视频爬虫下载工具youtube_dl安装及其使用
@@ -359,11 +359,13 @@ youtube_dl常用命令行介绍123456789101112131415161718-f, --format FORMAT   
 <p><strong>输出文件格式模板</strong></p>
 <p>网站上视频具有的下载格式可以通过<code>youtube-dl -F</code>查看可下载视频格式列表</p>
 <p>youtube-dl可以根据参数配置来确定视频下载格式</p>
-<p>Note: on Windows you may need to use double quotes instead of single.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"># Download best mp4 format available or any other best if no mp4 available</div><div class="line">$ youtube-dl -f &apos;bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best&apos;</div><div class="line"></div><div class="line"># Download best format available but not better that 480p</div><div class="line">$ youtube-dl -f &apos;bestvideo[height&lt;=480]+bestaudio/best[height&lt;=480]&apos;</div><div class="line"></div><div class="line"># Download best video only format but no bigger than 50 MB</div><div class="line">$ youtube-dl -f &apos;best[filesize&lt;50M]&apos;</div><div class="line"></div><div class="line"># Download best format available via direct link over HTTP/HTTPS protocol</div><div class="line">$ youtube-dl -f &apos;(bestvideo+bestaudio/best)[protocol^=http]&apos;</div><div class="line"></div><div class="line"># Download the best video format and the best audio format without merging them</div><div class="line">$ youtube-dl -f &apos;bestvideo,bestaudio&apos; -o &apos;%(title)s.f%(format_id)s.%(ext)s&apos;</div></pre></td></tr></table></figure></p>
+<p>Note: on Windows you may need to use double quotes instead of single.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"># Download best mp4 format available or any other best if no mp4 available</div><div class="line">$ youtube-dl -f &apos;bestvideo[ext=mp4]+bestaudio[ext=m4a]/best[ext=mp4]/best&apos;</div><div class="line"></div><div class="line"># Download best format available but not better that 480p</div><div class="line">$ youtube-dl -f &apos;bestvideo[height&lt;=480]+bestaudio/best[height&lt;=480]&apos;</div><div class="line"></div><div class="line"># Download best video only format but no bigger than 50 MB</div><div class="line">$ youtube-dl -f &apos;best[filesize&lt;50M]&apos;</div><div class="line"></div><div class="line"># Download best format available via direct link over HTTP/HTTPS protocol</div><div class="line">$ youtube-dl -f &apos;(bestvideo+bestaudio/best)[protocol^=http]&apos;</div><div class="line"></div><div class="line"># Download the best video format and the best audio format without merging them</div><div class="line">$ youtube-dl -f &apos;bestvideo,bestaudio&apos; -o &apos;%(title)s.f%(format_id)s.%(ext)s&apos;</div></pre></td></tr></table></figure>
 <p><strong>开发者模式使用</strong></p>
 <p>youtube_dl在python代码中使用方式</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">from __future__ import unicode_literals ## for python2</div><div class="line">import youtube_dl</div><div class="line"></div><div class="line">ydl_opts = &#123;&#125;</div><div class="line">with youtube_dl.YoutubeDL(ydl_opts) as ydl:</div><div class="line">    ydl.download([&apos;http://www.youtube.com/watch?v=BaW_jenozKc&apos;])</div></pre></td></tr></table></figure>
-<p>ydl_opts 配置可以在YoutubeDL.py中找到,for example<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">ydl_opts = &#123;</div><div class="line">    ##Download best format available but not better that 720p</div><div class="line">    &apos;format&apos;: &apos;bestvideo[height&lt;=720]+worstaudio[ext=m4a]/best[height&lt;=720][ext=mp4]&apos;,</div><div class="line">    &apos;merge_output_format&apos;: &apos;mp4&apos;,</div><div class="line">    &apos;outtmpl&apos;: &apos;./download/%(title)s.%(ext)s&apos;,</div><div class="line">    #     # &apos;postprocessors&apos;: [&#123;</div><div class="line">    #     #    &apos;key&apos;: &apos;FFmpegExtractAudio&apos;,</div><div class="line">    #     #    &apos;preferredcodec&apos;: &apos;mp3&apos;,</div><div class="line">    #     #    &apos;preferredquality&apos;: &apos;192&apos;,</div><div class="line">    #     # &#125;],</div><div class="line">    #     # &apos;logger&apos;: MyLogger(),</div><div class="line">    #     #&apos;progress_hooks&apos;: [my_hook],</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>ydl_opts 配置可以在YoutubeDL.py中找到,for example</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">ydl_opts = &#123;</div><div class="line">    ##Download best format available but not better that 720p</div><div class="line">    &apos;format&apos;: &apos;bestvideo[height&lt;=720]+worstaudio[ext=m4a]/best[height&lt;=720][ext=mp4]&apos;,</div><div class="line">    &apos;merge_output_format&apos;: &apos;mp4&apos;,</div><div class="line">    &apos;outtmpl&apos;: &apos;./download/%(title)s.%(ext)s&apos;,</div><div class="line">    #     # &apos;postprocessors&apos;: [&#123;</div><div class="line">    #     #    &apos;key&apos;: &apos;FFmpegExtractAudio&apos;,</div><div class="line">    #     #    &apos;preferredcodec&apos;: &apos;mp3&apos;,</div><div class="line">    #     #    &apos;preferredquality&apos;: &apos;192&apos;,</div><div class="line">    #     # &#125;],</div><div class="line">    #     # &apos;logger&apos;: MyLogger(),</div><div class="line">    #     #&apos;progress_hooks&apos;: [my_hook],</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h4 id="百度云盘同步工具bypy安装及其使用"><a href="#百度云盘同步工具bypy安装及其使用" class="headerlink" title="百度云盘同步工具bypy安装及其使用"></a>百度云盘同步工具bypy安装及其使用</h4><ul>
 <li>github地址 : <a href="https://github.com/houtianze/bypy" target="_blank" rel="external">bypy</a></li>
 </ul>
@@ -375,14 +377,12 @@ youtube_dl常用命令行介绍123456789101112131415161718-f, --format FORMAT   
 <p>第一次使用需要对百度云进行授权,运行任意命令即可进入百度云盘授权过程,通过给出url得到百度云盘的授权码.</p>
 <p>如果需要重置授权,运行<code>bypy -c</code>即可进入重置授权</p>
 <p><strong>bypy命令行使用</strong></p>
-<p>显示在云盘（程序的）根目录下文件列表：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bypy list</div></pre></td></tr></table></figure></p>
-<p>把当前目录同步到云盘：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bypy syncup</div></pre></td></tr></table></figure></p>
-<p>or<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bypy upload</div></pre></td></tr></table></figure></p>
-<p>把云盘内容同步到本地来：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bypy syncdown</div></pre></td></tr></table></figure></p>
-<p>or<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bypy downdir /</div></pre></td></tr></table></figure></p>
-<p>比较本地当前目录和云盘（程序的）根目录：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">bypy compare</div></pre></td></tr></table></figure></p>
-<p><strong>bypy代码运行</strong><br>在python代码中运行bypy<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">import bypy</div><div class="line">        by = bypy.ByPy()</div><div class="line">            by.syncup(fromdir,todir)</div></pre></td></tr></table></figure></p>
-
+<p>显示在云盘（程序的）根目录下文件列表：<code>bypy list</code></p>
+<p>把当前目录同步到云盘：<code>bypy syncup</code> or <code>bypy upload</code></p>
+<p>把云盘内容同步到本地来：<code>bypy syncdown</code> or <code>bypy downdir /</code></p>
+<p>比较本地当前目录和云盘（程序的）根目录：<code>bypy compare</code></p>
+<p><strong>bypy代码运行</strong><br>在python代码中运行bypy</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">import bypy</div><div class="line">        by = bypy.ByPy()</div><div class="line">            by.syncup(fromdir,todir)</div></pre></td></tr></table></figure>
       
     </div>
 
@@ -404,9 +404,9 @@ youtube_dl常用命令行介绍123456789101112131415161718-f, --format FORMAT   
       
         <div class="post-tags">
           
-            <a href="/tags/Django/" rel="tag">#Django</a>
-          
             <a href="/tags/Python/" rel="tag">#Python</a>
+          
+            <a href="/tags/Django/" rel="tag">#Django</a>
           
         </div>
       
@@ -422,6 +422,10 @@ youtube_dl常用命令行介绍123456789101112131415161718-f, --format FORMAT   
           </div>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/02/27/在线视频爬虫与百度云盘同步服务及其服务器架设-二/" rel="prev" title="在线视频爬虫与百度云盘同步服务及其服务器架设(二)">
+                在线视频爬虫与百度云盘同步服务及其服务器架设(二) <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -493,7 +497,7 @@ youtube_dl常用命令行介绍123456789101112131415161718-f, --format FORMAT   
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">15</span>
+              <span class="site-state-item-count">17</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
@@ -510,7 +514,7 @@ youtube_dl常用命令行介绍123456789101112131415161718-f, --format FORMAT   
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">14</span>
+                <span class="site-state-item-count">17</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
