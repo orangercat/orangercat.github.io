@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="ubuntu," />
 
 
 
@@ -84,15 +84,19 @@
 
 
 
-<meta name="description" content="learn more, try more, do more.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="喵窝">
-<meta property="og:url" content="http://yoursite.com/tags/VPN/index.html">
+<meta name="description" content="查看系统的swap信息1sudo swapon -s   // 或 sudo free -m 、sudo swapon --show
+查看硬盘分区的可用空间典型的做法是为swap单独创建一个分区，但是有时这是不可能完成的任务（像vps）。但是我们可以在已有的分区上创建swap文件。查看分区信息方法命令：df -h">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ubuntu增加swap区">
+<meta property="og:url" content="http://yoursite.com/2017/03/30/ubuntu增加swap区/index.html">
 <meta property="og:site_name" content="喵窝">
-<meta property="og:description" content="learn more, try more, do more.">
+<meta property="og:description" content="查看系统的swap信息1sudo swapon -s   // 或 sudo free -m 、sudo swapon --show
+查看硬盘分区的可用空间典型的做法是为swap单独创建一个分区，但是有时这是不可能完成的任务（像vps）。但是我们可以在已有的分区上创建swap文件。查看分区信息方法命令：df -h">
+<meta property="og:updated_time" content="2017-04-09T10:50:29.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="喵窝">
-<meta name="twitter:description" content="learn more, try more, do more.">
+<meta name="twitter:title" content="ubuntu增加swap区">
+<meta name="twitter:description" content="查看系统的swap信息1sudo swapon -s   // 或 sudo free -m 、sudo swapon --show
+查看硬盘分区的可用空间典型的做法是为swap单独创建一个分区，但是有时这是不可能完成的任务（像vps）。但是我们可以在已有的分区上创建swap文件。查看分区信息方法命令：df -h">
 
 
 
@@ -113,9 +117,9 @@
 
 
 
-  <link rel="canonical" href="http://yoursite.com/tags/VPN/"/>
+  <link rel="canonical" href="http://yoursite.com/2017/03/30/ubuntu增加swap区/"/>
 
-  <title> 标签: VPN | 喵窝 </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title> ubuntu增加swap区 | 喵窝 </title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -136,7 +140,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-left  ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -234,46 +238,166 @@
           <div id="content" class="content">
             
 
-  <div id="posts" class="posts-collapse">
-    <div class="collection-title">
-      <h2 >
-        VPN
-        <small>标签</small>
-      </h2>
-    </div>
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
 
     
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ubuntu增加swap区
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2017-03-30T16:39:48+08:00" content="2017-03-30">
+              2017-03-30
+            </time>
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="https://schema.org/Thing">
+                  <a href="/categories/ubuntu/" itemprop="url" rel="index">
+                    <span itemprop="name">ubuntu</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2017/03/30/ubuntu增加swap区/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2017/03/30/ubuntu增加swap区/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+             <span id="/2017/03/30/ubuntu增加swap区/" class="leancloud_visitors" data-flag-title="ubuntu增加swap区">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
       
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+      
+        <h4 id="查看系统的swap信息"><a href="#查看系统的swap信息" class="headerlink" title="查看系统的swap信息"></a>查看系统的swap信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo swapon -s   // 或 sudo free -m 、sudo swapon --show</div></pre></td></tr></table></figure>
+<h4 id="查看硬盘分区的可用空间"><a href="#查看硬盘分区的可用空间" class="headerlink" title="查看硬盘分区的可用空间"></a>查看硬盘分区的可用空间</h4><p>典型的做法是为swap单独创建一个分区，但是有时这是不可能完成的任务（像vps）。但是我们可以在已有的分区上创建swap文件。<br>查看分区信息方法命令：<code>df -h</code><br> <a id="more"></a></p>
+<h4 id="创建swap文件"><a href="#创建swap文件" class="headerlink" title="创建swap文件"></a>创建swap文件</h4><p>创建2048的 /var/swap 文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo dd if=/dev/vda1 of=/var/swap bs=2M count=1024</div></pre></td></tr></table></figure></p>
+<h4 id="激活swap文件"><a href="#激活swap文件" class="headerlink" title="激活swap文件"></a>激活swap文件</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo chmod 600 /var/swap</div><div class="line">sudo mkswap /var/swap   // 创建</div><div class="line">sudo swapon /var/swap   // 激活</div></pre></td></tr></table></figure>
+<p>检查是否成功：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo swapon -s   // 或 free -m</div></pre></td></tr></table></figure></p>
+<h4 id="永久激活创建的swap"><a href="#永久激活创建的swap" class="headerlink" title="永久激活创建的swap"></a>永久激活创建的swap</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo vi /etc/fstab</div><div class="line">/var/swap   none    swap    sw  0   0</div></pre></td></tr></table></figure>
+<h4 id="swap配置"><a href="#swap配置" class="headerlink" title="swap配置"></a>swap配置</h4><p>swap有一些选项设置可以提要系统性能；</p>
+<p>swappiness参数：Ram数据什么时候交换到swap，数值范围0-100（百分比）。如果数值接近于0，内核尽量不交换内存数据到swap，除非万不得已。如果数值接近100，将尽最大可能把内存数据交换到swap。<br>cat /proc/sys/vm/swappiness<br>默认值是60，对桌面系统还行，但是对vps，最好把它设置接近于0。</p>
+<p>更改方法：<br><code>sudo sysctl vm.swappiness=10</code><br><code>sudo sysctl vm.vfs_cache_pressure=50</code><br>这个设置会持续生效直到下次重启，我们可以在<code>/etc/sysctl.conf</code>文件中加入下面一行实现自动生效。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo vi /etc/sysctl.conf</div><div class="line">//在文件尾加入</div><div class="line">vm.swappiness=10</div><div class="line">vm.vfs_cache_pressure = 50</div></pre></td></tr></table></figure>
 
-      <h1 class="post-title">
+      
+    </div>
+
+    <div>
+      
         
-            <a class="post-title-link" href="/2016/09/16/vps安装L2tP-解决ios10无法连接PPTP-VPN/" itemprop="url">
-              
-                <span itemprop="name">vps安装L2tP-解决ios10无法连接PPTP VPN</span>
-              
-            </a>
+
+      
+    </div>
+
+    <div>
+      
         
-      </h1>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2016-09-16T17:06:17+08:00"
-              content="2016-09-16" >
-          09-16
-        </time>
-      </div>
+      
+    </div>
 
-    </header>
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/ubuntu/" rel="tag">#ubuntu</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/03/30/ubuntu16-04LTS安装redmine/" rel="next" title="ubuntu16.04LTS安装redmine">
+                <i class="fa fa-chevron-left"></i> ubuntu16.04LTS安装redmine
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </article>
 
 
-    
-  </div>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -281,6 +405,14 @@
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2017/03/30/ubuntu增加swap区/"
+           data-title="ubuntu增加swap区" data-url="http://yoursite.com/2017/03/30/ubuntu增加swap区/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -300,8 +432,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
+      <section class="site-overview sidebar-panel ">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/avatar.png"
@@ -362,6 +503,17 @@
 
       </section>
 
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#查看系统的swap信息"><span class="nav-number">1.</span> <span class="nav-text">查看系统的swap信息</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#查看硬盘分区的可用空间"><span class="nav-number">2.</span> <span class="nav-text">查看硬盘分区的可用空间</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#创建swap文件"><span class="nav-number">3.</span> <span class="nav-text">创建swap文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#激活swap文件"><span class="nav-number">4.</span> <span class="nav-text">激活swap文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#永久激活创建的swap"><span class="nav-number">5.</span> <span class="nav-text">永久激活创建的swap</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#swap配置"><span class="nav-number">6.</span> <span class="nav-text">swap配置</span></a></li></ol></div>
+            
+          </div>
+        </section>
       
 
     </div>
@@ -465,6 +617,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
 
   
 
