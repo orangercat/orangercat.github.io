@@ -1,23 +1,1215 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
 
-{% block title %} {{ config.title }} {% endblock %}
 
-{% block page_class %}
-  {% if is_home() %} page-home {% endif %}
-{% endblock %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block content %}
-  <section id="posts" class="posts-expand">
-    {% for post in page.posts %}
-      {{ post_template.render(post, true) }}
-    {% endfor %}
-  </section>
+<link rel="stylesheet" href="/css/main.css">
 
-  {% include '_partials/pagination.swig' %}
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(false) }}
-{% endblock %}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"orangercat.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+<meta name="description" content="learn more, try more, do more.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="喵窝">
+<meta property="og:url" content="http://orangercat.github.io/index.html">
+<meta property="og:site_name" content="喵窝">
+<meta property="og:description" content="learn more, try more, do more.">
+<meta property="og:locale">
+<meta property="article:author" content="cheochen">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://orangercat.github.io/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-Hans'
+  };
+</script>
+<title>喵窝</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">喵窝</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nice to see u</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cheochen</p>
+  <div class="site-description" itemprop="description">learn more, try more, do more.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://orangercat.github.io/2018/08/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9C%A8%E4%BA%A7%E5%93%81%E5%88%86%E6%9E%90%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cheochen">
+      <meta itemprop="description" content="learn more, try more, do more.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="喵窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/08/21/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0%E5%9C%A8%E4%BA%A7%E5%93%81%E5%88%86%E6%9E%90%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8/" class="post-title-link" itemprop="url">机器学习在产品分析中的应用</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-08-21 15:08:22" itemprop="dateCreated datePublished" datetime="2018-08-21T15:08:22+08:00">2018-08-21</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2018-08-23 18:17:22" itemprop="dateModified" datetime="2018-08-23T18:17:22+08:00">2018-08-23</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>利用机器学习如何更加精准的分析产品数据,以推动产品的成长.其中,原数据为:</p>
+<ol>
+<li>用户在产品中产生的一些行为数据</li>
+<li>直接反应到产品标准的一些数据, 如留存数据,用户活跃,用户新增,在线时长</li>
+</ol>
+<p>预计可以使用两种不同的思路来得出一些数据:</p>
+<ol>
+<li>通过用户行为数据预测留存影响</li>
+<li>通过对行为数据与用户流失数据的分析,对不同的行为数据进行流失点进行分类</li>
+</ol>
+<h2 id="逻辑回归"><a href="#逻辑回归" class="headerlink" title="逻辑回归"></a>逻辑回归</h2><ol>
+<li>本类问题可以抽象为多特征向量的逻辑回归问题</li>
+</ol>
+<h3 id="前期工作"><a href="#前期工作" class="headerlink" title="前期工作"></a>前期工作</h3><ol>
+<li>确定数据矩阵内容: 即特征与结果值<ol>
+<li>特征: 当天新增用户的行为数据</li>
+<li>结果值: 0/1区分留存数据</li>
+</ol>
+</li>
+<li>数据预处理<ol>
+<li>特征筛选: 利用python的特征选择工具确定采用特征</li>
+<li>特征归一化/标准化</li>
+</ol>
+</li>
+<li>确定语言与工具<ol>
+<li>python</li>
+<li>scikit-learn</li>
+</ol>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://orangercat.github.io/2018/04/23/%E5%88%A9%E7%94%A8Python%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E7%9A%84%E8%BD%AC%E7%9B%98%E6%A8%A1%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cheochen">
+      <meta itemprop="description" content="learn more, try more, do more.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="喵窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/04/23/%E5%88%A9%E7%94%A8Python%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E7%9A%84%E8%BD%AC%E7%9B%98%E6%A8%A1%E5%9E%8B/" class="post-title-link" itemprop="url">利用Python实现简单的转盘模型</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-04-23 21:30:49" itemprop="dateCreated datePublished" datetime="2018-04-23T21:30:49+08:00">2018-04-23</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://orangercat.github.io/2018/04/20/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cheochen">
+      <meta itemprop="description" content="learn more, try more, do more.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="喵窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/04/20/%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E4%B8%AD%E5%B8%B8%E7%94%A8%E7%9A%84%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B/" class="post-title-link" itemprop="url">数据分析中常用的数据模型</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2018-04-20 13:42:50" itemprop="dateCreated datePublished" datetime="2018-04-20T13:42:50+08:00">2018-04-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://orangercat.github.io/2018/03/21/%E5%8F%97%E9%99%90%E7%8E%BB%E5%B0%94%E5%85%B9%E6%9B%BC%E6%9C%BA%EF%BC%88Restricted-Boltzmann-Machine-RBM-%E5%AD%A6%E4%B9%A0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cheochen">
+      <meta itemprop="description" content="learn more, try more, do more.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="喵窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/03/21/%E5%8F%97%E9%99%90%E7%8E%BB%E5%B0%94%E5%85%B9%E6%9B%BC%E6%9C%BA%EF%BC%88Restricted-Boltzmann-Machine-RBM-%E5%AD%A6%E4%B9%A0/" class="post-title-link" itemprop="url">受限玻尔兹曼机（Restricted Boltzmann Machine,RBM)学习</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2018-03-21 15:48:59 / Modified: 15:51:24" itemprop="dateCreated datePublished" datetime="2018-03-21T15:48:59+08:00">2018-03-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Machine-Learning/" itemprop="url" rel="index"><span itemprop="name">Machine Learning</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h3><ol>
+<li>它的结构相对比较简单，是一个只有可视层和隐藏层两层结构的网络</li>
+<li>从严格意义上说，RBM并不属于深层神经网络，它只是一个两层结构，并不“深”，但它同时也是构成其他深度神经网络的常用层次组件</li>
+<li>RBM是由可视层和隐藏层相互连接的一个完全二分图网络结构，每一个神经元是一个二值单元，也就是每一个神经元的取值只能等于0或1</li>
+<li>RBM的网络结构具有这样的特点：可视层的每一个神经元与隐藏层的每一个神经元相互连接；可视层神经元之间，隐藏层神经元之间没有连线
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/03/21/%E5%8F%97%E9%99%90%E7%8E%BB%E5%B0%94%E5%85%B9%E6%9B%BC%E6%9C%BA%EF%BC%88Restricted-Boltzmann-Machine-RBM-%E5%AD%A6%E4%B9%A0/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://orangercat.github.io/2018/03/21/%E6%8E%A8%E8%8D%90%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cheochen">
+      <meta itemprop="description" content="learn more, try more, do more.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="喵窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2018/03/21/%E6%8E%A8%E8%8D%90%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">推荐算法笔记</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2018-03-21 15:41:15 / Modified: 15:50:19" itemprop="dateCreated datePublished" datetime="2018-03-21T15:41:15+08:00">2018-03-21</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="推荐系统分类-根据不同输入"><a href="#推荐系统分类-根据不同输入" class="headerlink" title="推荐系统分类(根据不同输入)"></a>推荐系统分类(根据不同输入)</h3><ol>
+<li>比较熟悉的、经常使用的协同过滤的技术，它使用的一方面是用户的信息，另一方面是和用户有相似行为的群体的信息，协同过滤技术就是根据这一群体的信息给用户做推荐。</li>
+<li>基于内容的推荐，它用到的一方面是用户的信息，另一方面是商品的显性相关属性信息，基于内容的推荐就是向用户推荐他可能浏览或者购买过的相似产品的信息。</li>
+<li>混合技术，会运用不同的输入和技术共同进行推荐。</li>
+</ol>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/03/21/%E6%8E%A8%E8%8D%90%E7%AE%97%E6%B3%95%E7%AC%94%E8%AE%B0/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://orangercat.github.io/2017/12/21/%E4%BA%A7%E5%93%81%E9%87%8D%E6%9E%84%E6%B3%A8%E6%84%8F/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cheochen">
+      <meta itemprop="description" content="learn more, try more, do more.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="喵窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/12/21/%E4%BA%A7%E5%93%81%E9%87%8D%E6%9E%84%E6%B3%A8%E6%84%8F/" class="post-title-link" itemprop="url">产品重构注意</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-12-21 13:18:59" itemprop="dateCreated datePublished" datetime="2017-12-21T13:18:59+08:00">2017-12-21</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2018-03-21 15:50:33" itemprop="dateModified" datetime="2018-03-21T15:50:33+08:00">2018-03-21</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/%E4%BA%A7%E5%93%81/" itemprop="url" rel="index"><span itemprop="name">产品</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="什么情况下需要重构"><a href="#什么情况下需要重构" class="headerlink" title="什么情况下需要重构"></a>什么情况下需要重构</h4><ol>
+<li>结构错乱<ul>
+<li>代码无法分出层次,无法分清业务线.</li>
+<li>各个业务模块间/层次间的代码互相夹杂.</li>
+<li>由于多人协作导致的多种架构(MVP/MVVM/MVC等)并存.</li>
+<li>规范性问题,导致各个模块内的代码形式互相不一致, 风格迥异.</li>
+</ul>
+</li>
+<li>可读性差<ul>
+<li>超长函数,超大类</li>
+<li>代码的格式不规范或不一致.</li>
+<li>冗余代码,无用代码,重复代码.</li>
+<li>过于高明, 使用一些不常用的小技巧而且没有相关注释.</li>
+<li>滥用继承, 接口实现等, 导致难以跟踪.</li>
+</ul>
+</li>
+<li>不能很好的适应产品的发展<ul>
+<li>维护困难, 牵一发动全身.</li>
+<li>不具备扩展灵活性, 无法很快引入系统版本更新时新特性.</li>
+<li>不具备可变更性, 产品添加新功能或修改需求时需要修改大量的代码.</li>
+</ul>
+</li>
+</ol>
+<h4 id="重构的目标"><a href="#重构的目标" class="headerlink" title="重构的目标"></a>重构的目标</h4><p>重构的目的就是要提高代码质量, 而高质量的代码指标个人认为有如下几点, 当然其实也是老生常谈的几点.<br>排名分先后:</p>
+<ol>
+<li>可读性<ul>
+<li>规范一致性.</li>
+<li>结构, 层次明了.</li>
+<li>命名有含义, 注释要清晰.</li>
+<li>逻辑简短, 没有长篇大幅的代码块.</li>
+<li>方法提取, 类继承关系合理.</li>
+<li>不滥用设计模式.</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p>聪明是可读性的敌人.</p>
+</blockquote>
+<ol start="2">
+<li><p>可维护性</p>
+<ul>
+<li>杜绝魔鬼数字/字符串/尺寸值/颜色值等</li>
+<li>代码复用,以便维护.</li>
+<li>不写死,预测可能的变化(但不要提前设计).</li>
+</ul>
+</li>
+<li><p>可扩展性</p>
+<ul>
+<li>良好的分层结构, MVx模式运用.</li>
+<li>通过一些设计模式的使用来提高可扩展性.</li>
+<li>开闭原则: 修改关闭, 扩展开放.</li>
+</ul>
+</li>
+</ol>
+<h4 id="如何重构"><a href="#如何重构" class="headerlink" title="如何重构"></a>如何重构</h4><p>首先让我们重温下”重构”的含义:</p>
+<blockquote>
+<p>&lt;&lt;重构 — 改善既有代码的设计&gt;&gt; 这本大神作品强烈建议大家翻阅下~ 里面对重构的定义, 以及如何从一个个小的Bad Smell开始重构等都有详细的描述.</p>
+</blockquote>
+<p>那么作为一个进行已久的Android工程, 我们应该如何重构呢?<br>其实这是一个对症下药的问题, 针对为什么要重构提出的几个代码问题, 重构也可以分成以下几步:</p>
+<ol>
+<li><p>架构选择, 结构调整</p>
+<ul>
+<li><p>根据App的业务场景(展示型, 交互型, 后台工具型…)选择合适的架构.</p>
+<ul>
+<li>并不是说一定要选用一个架构, 比如说后台工具型的App, 可能界面不多, 也服务器的交互也少, 基本是由Service组成, 可能直接用Android原生的结构就可以.</li>
+<li>界面较多, 且与服务器交互较多的建议选用MVP架构. 可以通过P来做数据处理, 将数据源M与展示层V解耦, 便于替换数据源或是改变UI.<br>根据选用的架构以及业务模块分包</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>技术/开源库选定</p>
+<ul>
+<li>ListView/RecyclerView的选择, Fragment/Activity的选择等.</li>
+<li>根据业务特点和选择的架构, 选用相关技术/开源库支持或对当前使用的进行整理.</li>
+<li>例如HTTP请求库, 缓存库, 图片加载库等等.</li>
+</ul>
+</li>
+<li>确定规范<ul>
+<li>制定编码规范, 可以根据Google推荐的Java编码规范, 适当定制.例如我的项目中的基本规范.</li>
+<li>制定代码提交规范, git flow管理流程规范等.</li>
+</ul>
+</li>
+<li>自底而上, 由小至大<ul>
+<li>从底部开始, 也就是常说的Model层,数据层开始, 因为这部分相对独立, 可以通过提供接口与UI层隔离.</li>
+<li>不要一下就大面积重构, 需要逐个小的case进行重构验证, 保证当前运行.</li>
+</ul>
+</li>
+<li>持续重构, 伴随测试<ul>
+<li>持续进行小的重构, 每次重构需要伴随测试, 保证重构结果.</li>
+<li>提取方法, 去除重复代码.</li>
+<li>结构调整.</li>
+<li>融入面向对象/接口编程思想, 注意SOLID原则.</li>
+<li>多用组合, 少用继承<br>……<br>最好有单元测试支持.</li>
+</ul>
+</li>
+<li>重构而非重写<ul>
+<li>不到万不得已不要想重写.</li>
+<li>重写会产生各种意想不到的问题, 诸如设计过度, 对于当前代码把握不够(例如现在看起来很不友好的代码可能就是为了解决一个架构无法解决的问题等).</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://orangercat.github.io/2017/08/13/Python%E5%A4%84%E7%90%86%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cheochen">
+      <meta itemprop="description" content="learn more, try more, do more.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="喵窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/08/13/Python%E5%A4%84%E7%90%86%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/" class="post-title-link" itemprop="url">Python处理日志文件</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-08-13 09:01:33" itemprop="dateCreated datePublished" datetime="2017-08-13T09:01:33+08:00">2017-08-13</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2017-08-15 14:18:29" itemprop="dateModified" datetime="2017-08-15T14:18:29+08:00">2017-08-15</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>公司视频应用,需要针对用户的操作数据分析,得出应用内所有的视频的权重分析,方便以后更好的进行推荐视频操作.目前已有的log格式主要有:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">action             vid           uid</span><br><span class="line">view video      video_001        NaN</span><br><span class="line">play video      video_001       user_00x</span><br></pre></td></tr></table></figure>
+<p>用户分为注册用户与游客两种,操作主要有<code>view,like,comment,upload,download</code>几种.为了方便处理,第一阶段只考虑针对游客访问的视频进行处理.这样形成一个只有<code>action</code>与<code>uid</code>的字典形式.处理数据主要使用<code>python</code>的<code>pandas</code>库.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/08/13/Python%E5%A4%84%E7%90%86%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://orangercat.github.io/2017/07/26/2017-07-26-CMake-%E6%9E%84%E5%BB%BA%E9%A1%B9%E7%9B%AE%E6%95%99%E7%A8%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cheochen">
+      <meta itemprop="description" content="learn more, try more, do more.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="喵窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/07/26/2017-07-26-CMake-%E6%9E%84%E5%BB%BA%E9%A1%B9%E7%9B%AE%E6%95%99%E7%A8%8B/" class="post-title-link" itemprop="url">CMake 构建项目教程</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-07-26 21:25:41" itemprop="dateCreated datePublished" datetime="2017-07-26T21:25:41+08:00">2017-07-26</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2017-08-14 21:25:09" itemprop="dateModified" datetime="2017-08-14T21:25:09+08:00">2017-08-14</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/C-C/" itemprop="url" rel="index"><span itemprop="name">C/C++</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h5 id="Cmake介绍"><a href="#Cmake介绍" class="headerlink" title="Cmake介绍"></a>Cmake介绍</h5><p>CMake意为cross-platform make，可用于管理c/c++工程。CMake解析配置文件CMakeLists.txt生成Makefile，相比直接用Makefile管理工程，CMake更灵活和简单<br>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/07/26/2017-07-26-CMake-%E6%9E%84%E5%BB%BA%E9%A1%B9%E7%9B%AE%E6%95%99%E7%A8%8B/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://orangercat.github.io/2017/07/12/2017-07-12-AlS%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%BA%94%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cheochen">
+      <meta itemprop="description" content="learn more, try more, do more.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="喵窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/07/12/2017-07-12-AlS%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%BA%94%E7%94%A8/" class="post-title-link" itemprop="url">AlS学习与应用</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-07-12 10:54:43" itemprop="dateCreated datePublished" datetime="2017-07-12T10:54:43+08:00">2017-07-12</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2017-07-26 21:28:19" itemprop="dateModified" datetime="2017-07-26T21:28:19+08:00">2017-07-26</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"><br></script><br>参考网址:<br><a target="_blank" rel="noopener" href="https://github.com/endymecy/spark-ml-source-analysis/blob/master/%E6%8E%A8%E8%8D%90/ALS.md">交换最小二乘</a></p>
+<h5 id="Tips"><a href="#Tips" class="headerlink" title="Tips:"></a>Tips:</h5><p><strong>矩阵中的最大的不相关的向量的个数，就叫秩</strong><br>一个m<em>n的矩阵，如果秩很低（秩r远小于m,n），则它可以拆成一个m</em>r矩阵和一个r<em>n矩阵之积（类似于SVD分解）。后面这两个矩阵所占用的存储空间比原来的m</em>n矩阵小得多。</p>
+<h4 id="什么是ALS"><a href="#什么是ALS" class="headerlink" title="什么是ALS"></a>什么是ALS</h4><p>&emsp;&emsp;<code>ALS</code>是交替最小二乘（alternating least squares）的简称。在机器学习中，ALS特指使用交替最小二乘求解的一个协同推荐算法。它通过观察到的所有用户给商品的打分，来推断每个用户的喜好并向用户推荐适合的商品。这就是一个有m个的U(用户),与n个V(商品)的矩阵.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/07/12/2017-07-12-AlS%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%BA%94%E7%94%A8/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://orangercat.github.io/2017/04/29/2017-04-29-Resilio-BtSync-%E6%90%AD%E5%BB%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cheochen">
+      <meta itemprop="description" content="learn more, try more, do more.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="喵窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/04/29/2017-04-29-Resilio-BtSync-%E6%90%AD%E5%BB%BA/" class="post-title-link" itemprop="url">Resilio(BtSync)搭建</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-04-29 15:20:59" itemprop="dateCreated datePublished" datetime="2017-04-29T15:20:59+08:00">2017-04-29</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2017-08-14 16:24:49" itemprop="dateModified" datetime="2017-08-14T16:24:49+08:00">2017-08-14</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="Resilio（原名：BtSync）介绍"><a href="#Resilio（原名：BtSync）介绍" class="headerlink" title="Resilio（原名：BtSync）介绍"></a>Resilio（原名：BtSync）介绍</h4><p>Resilio同步是PC和Mac，NAS，甚至服务器之间传输文件的最好方法</p>
+<h4 id="Resilio安装"><a href="#Resilio安装" class="headerlink" title="Resilio安装"></a>Resilio安装</h4><ol>
+<li>下载，安装主程序</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;deb http:&#x2F;&#x2F;linux-packages.resilio.com&#x2F;resilio-sync&#x2F;deb resilio-sync non-free&quot; | sudo tee &#x2F;etc&#x2F;apt&#x2F;sources.list.d&#x2F;resilio-sync.list</span><br><span class="line">wget -qO - https:&#x2F;&#x2F;linux-packages.resilio.com&#x2F;resilio-sync&#x2F;key.asc | sudo apt-key add -</span><br><span class="line">apt-get update</span><br><span class="line">apt-get install resilio-sync</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>开启任意主机连接</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sed -i &quot;s&#x2F;127.0.0.1&#x2F;0.0.0.0&#x2F;g&quot; &#x2F;etc&#x2F;resilio-sync&#x2F;config.json</span><br><span class="line">sed -i &quot;s&#x2F;127.0.0.1&#x2F;0.0.0.0&#x2F;g&quot; &#x2F;etc&#x2F;resilio-sync&#x2F;user_config.json</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>配置同步文件夹<br>假设我们希望能把密钥的文件夹同步到 /data/sync ，我们需要给 /data/sync 设置Resilio Sync的用户权限，才能向这个文件夹写入内容。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chown -R rslsync &#x2F;data&#x2F;sync</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>Resilio Sync控制命令</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">service resilio-sync start #启动</span><br><span class="line">service resilio-sync stop #停止</span><br></pre></td></tr></table></figure>
+<p>5.开启防火墙端口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">iptables -I INPUT -m state --state NEW -m tcp -p tcp --dport 8888 -j ACCEPT</span><br><span class="line">iptables -I INPUT -m state --state NEW -m udp -p udp --dport 8888 -j ACCEPT</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+  <nav class="pagination">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cheochen</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({{ JSON.stringify(config) }});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="{{ src }}">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

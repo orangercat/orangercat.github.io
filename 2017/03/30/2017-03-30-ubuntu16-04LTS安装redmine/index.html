@@ -1,38 +1,468 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
 
 
-{% block title %} {{ page.title }} | {{ config.title }} {% endblock %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block page_class %}page-post-detail{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"orangercat.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+<meta name="description" content="redmine介绍Redmine是用Ruby开发的基于web的项目管理软件，是用ROR框架开发的一套跨平台项目管理系统. 系统安装环境ubuntu server 16.04 LTS腾讯云标准S1: 1核1GBroot 权限">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ubuntu16.04LTS安装redmine">
+<meta property="og:url" content="http://orangercat.github.io/2017/03/30/2017-03-30-ubuntu16-04LTS%E5%AE%89%E8%A3%85redmine/index.html">
+<meta property="og:site_name" content="喵窝">
+<meta property="og:description" content="redmine介绍Redmine是用Ruby开发的基于web的项目管理软件，是用ROR框架开发的一套跨平台项目管理系统. 系统安装环境ubuntu server 16.04 LTS腾讯云标准S1: 1核1GBroot 权限">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-03-30T06:05:23.000Z">
+<meta property="article:modified_time" content="2017-09-27T03:34:10.000Z">
+<meta property="article:author" content="cheochen">
+<meta property="article:tag" content="Redmine">
+<meta property="article:tag" content="Ruby">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://orangercat.github.io/2017/03/30/2017-03-30-ubuntu16-04LTS%E5%AE%89%E8%A3%85redmine/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+<title>ubuntu16.04LTS安装redmine | 喵窝</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
     </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">喵窝</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nice to see u</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#redmine%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">redmine介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%B3%BB%E7%BB%9F%E5%AE%89%E8%A3%85%E7%8E%AF%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">系统安装环境</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7%E5%AE%89%E8%A3%85"><span class="nav-number">3.</span> <span class="nav-text">开发工具安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redmine%E7%8E%AF%E5%A2%83%E5%AE%89%E8%A3%85"><span class="nav-number">4.</span> <span class="nav-text">redmine环境安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#redmine%E5%AE%89%E8%A3%85"><span class="nav-number">5.</span> <span class="nav-text">redmine安装</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#nginx%E5%AE%89%E8%A3%85"><span class="nav-number">5.1.</span> <span class="nav-text">nginx安装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Mysql%E5%AE%89%E8%A3%85"><span class="nav-number">5.2.</span> <span class="nav-text">Mysql安装</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#redmine%E5%AE%89%E8%A3%85-1"><span class="nav-number">5.3.</span> <span class="nav-text">redmine安装</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%BC%82%E6%AD%A5%E9%82%AE%E7%AE%B1%E5%8F%91%E9%80%81%E8%AE%BE%E7%BD%AE"><span class="nav-number">6.</span> <span class="nav-text">使用异步邮箱发送设置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#docker-%E5%AE%89%E8%A3%85-redmine"><span class="nav-number">7.</span> <span class="nav-text">docker 安装 redmine</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cheochen</p>
+  <div class="site-description" itemprop="description">learn more, try more, do more.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://orangercat.github.io/2017/03/30/2017-03-30-ubuntu16-04LTS%E5%AE%89%E8%A3%85redmine/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cheochen">
+      <meta itemprop="description" content="learn more, try more, do more.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="喵窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          ubuntu16.04LTS安装redmine
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-03-30 14:05:23" itemprop="dateCreated datePublished" datetime="2017-03-30T14:05:23+08:00">2017-03-30</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2017-09-27 11:34:10" itemprop="dateModified" datetime="2017-09-27T11:34:10+08:00">2017-09-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Ruby/" itemprop="url" rel="index"><span itemprop="name">Ruby</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h4 id="redmine介绍"><a href="#redmine介绍" class="headerlink" title="redmine介绍"></a>redmine介绍</h4><p>Redmine是用Ruby开发的基于web的项目管理软件，是用ROR框架开发的一套跨平台项目管理系统.</p>
+<h4 id="系统安装环境"><a href="#系统安装环境" class="headerlink" title="系统安装环境"></a>系统安装环境</h4><p>ubuntu server 16.04 LTS<br>腾讯云标准S1: 1核1GB<br>root 权限<br> <span id="more"></span></p>
+<h4 id="开发工具安装"><a href="#开发工具安装" class="headerlink" title="开发工具安装"></a>开发工具安装</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install build-essential</span><br><span class="line">sudo apt-get install subversion git</span><br></pre></td></tr></table></figure>
+<h4 id="redmine环境安装"><a href="#redmine环境安装" class="headerlink" title="redmine环境安装"></a>redmine环境安装</h4><ol>
+<li>安装 rvm （用于管理多个 ruby 版本的一个管理器）</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gpg --keyserver hkp:&#x2F;&#x2F;keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3</span><br><span class="line">curl -sSL https:&#x2F;&#x2F;get.rvm.io | bash -s stable</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>载入 rvm 环境</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">source &#x2F;etc&#x2F;profile.d&#x2F;rvm.sh</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>检查 rvm 是否安装成功</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rvm -v</span><br><span class="line">rvm 1.27.0 (latest) by Wayne E. Seguin &lt;wayneeseguin@gmail.com&gt;, Michal Papis &lt;mpapis@gmail.com&gt; [https:&#x2F;&#x2F;rvm.io&#x2F;]</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>安装 ruby 环境</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rvm requirements    &#x2F;&#x2F;更新依赖包</span><br><span class="line">rvm install 2.3.0   &#x2F;&#x2F;安装较为稳定的 2.3.0 版本</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>设置 ruby 默认版本</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rvm use 2.3.0 --default</span><br></pre></td></tr></table></figure>
+<ol start="7">
+<li>安装 bundler</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gem install bundler</span><br></pre></td></tr></table></figure>
+<ol start="8">
+<li>安装 rails</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gem install rails</span><br></pre></td></tr></table></figure>
+<ol start="9">
+<li>检查安装包版本</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">rvm -v</span><br><span class="line">ruby -v</span><br><span class="line">rails -v</span><br><span class="line">bundler -v</span><br></pre></td></tr></table></figure>
+<ol start="10">
+<li>可选升级</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gem update --system</span><br></pre></td></tr></table></figure>
+<h4 id="redmine安装"><a href="#redmine安装" class="headerlink" title="redmine安装"></a>redmine安装</h4><h5 id="nginx安装"><a href="#nginx安装" class="headerlink" title="nginx安装"></a>nginx安装</h5><ol>
+<li>安装 passenger: <code>gem install passenger</code></li>
+<li>安装 curl 模块:<code>sudo apt-get install libcurl4-openssl-dev</code></li>
+<li>安装 pcre:<code>sudo apt-get install libpcre3 libpcre3-dev</code></li>
+<li>安装 nginx:<code>passenger-install-nginx-module</code></li>
+<li>修改nginx配置文件</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">server &#123;</span><br><span class="line">    listen       80;</span><br><span class="line">    server_name  redmine.example.com;</span><br><span class="line">    access_log  logs&#x2F;redmine.example.com.access.log;</span><br><span class="line">    error_log   logs&#x2F;redmine.example.com.error.log;</span><br><span class="line">    location &#x2F; &#123;</span><br><span class="line">        root   &#x2F;opt&#x2F;redmine-3.3.0&#x2F;public;</span><br><span class="line">        index  index.html index.htm;</span><br><span class="line">        passenger_enabled on;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="Mysql安装"><a href="#Mysql安装" class="headerlink" title="Mysql安装"></a>Mysql安装</h5><p>安装mysql<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install mysql-server</span><br></pre></td></tr></table></figure></p>
+<h5 id="redmine安装-1"><a href="#redmine安装-1" class="headerlink" title="redmine安装"></a>redmine安装</h5><ol>
+<li>将软件包安装到 /opt 目录下</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 下载软件包</span><br><span class="line">cd &#x2F;opt&#x2F;</span><br><span class="line">wget http:&#x2F;&#x2F;www.redmine.org&#x2F;releases&#x2F;redmine-3.3.0.tar.gz</span><br><span class="line">tar -zxvf redmine-3.3.0.tar.gz</span><br><span class="line">cd redmine-3.3.0</span><br></pre></td></tr></table></figure>
+<ol start="2">
+<li>设置 redmine 数据库、用户名、口令</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">mysql -u root -p</span><br><span class="line">CREATE DATABASE redmine CHARACTER SET utf8;</span><br><span class="line">CREATE USER &#39;redmine&#39;@&#39;localhost&#39; IDENTIFIED BY &#39;my_password&#39;; &#x2F;&#x2F; 这里的my_password是你的redmine数据库账号的密码</span><br><span class="line">GRANT ALL PRIVILEGES ON redmine.* TO &#39;redmine&#39;@&#39;localhost&#39;;</span><br><span class="line">flush privileges;</span><br></pre></td></tr></table></figure>
+<ol start="3">
+<li>设置连接数据库<br>修改redmine/config下的数据库配置文件,主要为数据库用户名与密码配置</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 编辑数据库配置文件</span><br><span class="line">cp config&#x2F;database.yml.example config&#x2F;database.yml</span><br><span class="line">vim config&#x2F;database.yml</span><br></pre></td></tr></table></figure>
+<ol start="4">
+<li>redmine测试</li>
+</ol>
+<p>根据</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bundle install --without development test</span><br></pre></td></tr></table></figure>
+<p>提示来安装缺少</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">apt-get install imagemagick &#x2F;&#x2F;生成图片的依赖库</span><br><span class="line">apt-get install libmysqlclient-dev</span><br><span class="line">apt-get install libmagickwand-dev</span><br></pre></td></tr></table></figure>
+<ol start="5">
+<li>设置redmine文件夹权限</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chown -R redmine:redmine &#x2F;opt&#x2F;redmine</span><br><span class="line">chmod -R 755 &#x2F;opt&#x2F;redmine</span><br></pre></td></tr></table></figure>
+<ol start="6">
+<li>设置开机启动</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">vim &#x2F;etc&#x2F;rc.local&#x2F;</span><br><span class="line">source &#x2F;etc&#x2F;profile.d&#x2F;rvm.sh </span><br><span class="line">&#x2F;opt&#x2F;nginx&#x2F;sbin&#x2F;nginx</span><br></pre></td></tr></table></figure>
+<p>ubuntu nginx 启动<code>/opt/nginx/sbin/nginx -c nginx.conf</code></p>
+<ol start="7">
+<li>redmine重启</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">source &#x2F;etc&#x2F;profile.d&#x2F;rvm.sh </span><br><span class="line">passenger-config restart-app</span><br></pre></td></tr></table></figure>
+<h4 id="使用异步邮箱发送设置"><a href="#使用异步邮箱发送设置" class="headerlink" title="使用异步邮箱发送设置"></a>使用异步邮箱发送设置</h4><p>提交项目时候回发现比较慢,是因为设置了smtp邮件,在邮件发送以后才能提交项目.可以使用异步邮箱模式:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">production:</span><br><span class="line">    email_delivery:</span><br><span class="line">      delivery_method: :async_smtp</span><br><span class="line">      async_smtp_settings:</span><br><span class="line">        enable_starttls_auto: true</span><br><span class="line">        address: &quot;smtp.gmail.com&quot;</span><br><span class="line">        port: 587</span><br><span class="line">        domain: &quot;smtp.gmail.com&quot; </span><br><span class="line">        authentication: :plain</span><br><span class="line">        user_name: &quot;xxx@gmail.com&quot;</span><br><span class="line">        password: &quot;xxx&quot;</span><br></pre></td></tr></table></figure>
+<h4 id="docker-安装-redmine"><a href="#docker-安装-redmine" class="headerlink" title="docker 安装 redmine"></a>docker 安装 redmine</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docker run --name&#x3D;postgresql-redmine -d --env&#x3D;&#39;DB_NAME&#x3D;redmine_production&#39; --env&#x3D;&#39;DB_USER&#x3D;redmine&#39; --env&#x3D;&#39;DB_PASS&#x3D;44087365&#39; --volume&#x3D;&#x2F;srv&#x2F;docker&#x2F;redmine&#x2F;postgresql:&#x2F;var&#x2F;lib&#x2F;postgresql sameersbn&#x2F;postgresql:9.6-2</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker run --name&#x3D;redmine -d --link&#x3D;postgresql-redmine:postgresql --publish&#x3D;10083:80 --env&#x3D;&#39;REDMINE_PORT&#x3D;10083&#39; --volume&#x3D;&#x2F;srv&#x2F;docker&#x2F;redmine&#x2F;redmine:&#x2F;home&#x2F;redmine&#x2F;data sameersbn&#x2F;redmine:3.4.2</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>docker run –name=redmine -it –rm <a href="mailto:--env=&#39;SMTP_USER=message.vidmeme@gmail.com">--env=&#39;SMTP_USER=message.vidmeme@gmail.com</a>‘ --env=‘SMTP_PASS=44087365@cc’ –volume=/srv/docker/redmine/redmine:/home/redmine/data sameersbn/redmine:3.4.2<br><code>`</code></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Redmine/" rel="tag"># Redmine</a>
+              <a href="/tags/Ruby/" rel="tag"># Ruby</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/03/10/2017-03-10-scrapy%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" rel="prev" title="scrapy学习笔记">
+                  <i class="fa fa-chevron-left"></i> scrapy学习笔记
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/03/30/2017-03-30-ubuntu%E5%A2%9E%E5%8A%A0swap%E5%8C%BA/" rel="next" title="ubuntu增加swap区">
+                  ubuntu增加swap区 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cheochen</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({{ JSON.stringify(config) }});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="{{ src }}">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

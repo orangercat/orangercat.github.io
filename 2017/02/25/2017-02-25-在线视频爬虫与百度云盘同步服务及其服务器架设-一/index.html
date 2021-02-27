@@ -1,38 +1,419 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
 
 
-{% block title %} {{ page.title }} | {{ config.title }} {% endblock %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block page_class %}page-post-detail{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"orangercat.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+<meta name="description" content="在线视频爬虫下载工具youtube_dl安装及其使用 github地址 : youtube_dl  利用python管理工具pip安装 pip install --upgrade youtube-dl youtube_dl常用命令行介绍123456789101112131415161718-f, --format FORMAT              Video format code, see">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在线视频爬虫与百度云盘同步服务及其服务器架设(一)">
+<meta property="og:url" content="http://orangercat.github.io/2017/02/25/2017-02-25-%E5%9C%A8%E7%BA%BF%E8%A7%86%E9%A2%91%E7%88%AC%E8%99%AB%E4%B8%8E%E7%99%BE%E5%BA%A6%E4%BA%91%E7%9B%98%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1%E5%8F%8A%E5%85%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9E%B6%E8%AE%BE-%E4%B8%80/index.html">
+<meta property="og:site_name" content="喵窝">
+<meta property="og:description" content="在线视频爬虫下载工具youtube_dl安装及其使用 github地址 : youtube_dl  利用python管理工具pip安装 pip install --upgrade youtube-dl youtube_dl常用命令行介绍123456789101112131415161718-f, --format FORMAT              Video format code, see">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-02-25T10:48:42.000Z">
+<meta property="article:modified_time" content="2017-02-27T03:17:05.000Z">
+<meta property="article:author" content="cheochen">
+<meta property="article:tag" content="Django">
+<meta property="article:tag" content="Python">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://orangercat.github.io/2017/02/25/2017-02-25-%E5%9C%A8%E7%BA%BF%E8%A7%86%E9%A2%91%E7%88%AC%E8%99%AB%E4%B8%8E%E7%99%BE%E5%BA%A6%E4%BA%91%E7%9B%98%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1%E5%8F%8A%E5%85%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9E%B6%E8%AE%BE-%E4%B8%80/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+<title>在线视频爬虫与百度云盘同步服务及其服务器架设(一) | 喵窝</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
     </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">喵窝</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nice to see u</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%9C%A8%E7%BA%BF%E8%A7%86%E9%A2%91%E7%88%AC%E8%99%AB%E4%B8%8B%E8%BD%BD%E5%B7%A5%E5%85%B7youtube-dl%E5%AE%89%E8%A3%85%E5%8F%8A%E5%85%B6%E4%BD%BF%E7%94%A8"><span class="nav-number">1.</span> <span class="nav-text">在线视频爬虫下载工具youtube_dl安装及其使用</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%99%BE%E5%BA%A6%E4%BA%91%E7%9B%98%E5%90%8C%E6%AD%A5%E5%B7%A5%E5%85%B7bypy%E5%AE%89%E8%A3%85%E5%8F%8A%E5%85%B6%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">百度云盘同步工具bypy安装及其使用</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cheochen</p>
+  <div class="site-description" itemprop="description">learn more, try more, do more.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://orangercat.github.io/2017/02/25/2017-02-25-%E5%9C%A8%E7%BA%BF%E8%A7%86%E9%A2%91%E7%88%AC%E8%99%AB%E4%B8%8E%E7%99%BE%E5%BA%A6%E4%BA%91%E7%9B%98%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1%E5%8F%8A%E5%85%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9E%B6%E8%AE%BE-%E4%B8%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cheochen">
+      <meta itemprop="description" content="learn more, try more, do more.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="喵窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          在线视频爬虫与百度云盘同步服务及其服务器架设(一)
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-02-25 18:48:42" itemprop="dateCreated datePublished" datetime="2017-02-25T18:48:42+08:00">2017-02-25</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2017-02-27 11:17:05" itemprop="dateModified" datetime="2017-02-27T11:17:05+08:00">2017-02-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Python-Web/" itemprop="url" rel="index"><span itemprop="name">Python,Web</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h4 id="在线视频爬虫下载工具youtube-dl安装及其使用"><a href="#在线视频爬虫下载工具youtube-dl安装及其使用" class="headerlink" title="在线视频爬虫下载工具youtube_dl安装及其使用"></a>在线视频爬虫下载工具youtube_dl安装及其使用</h4><ul>
+<li>github地址 : <a target="_blank" rel="noopener" href="https://github.com/rg3/youtube-dl">youtube_dl</a></li>
+</ul>
+<p><strong>利用python管理工具pip安装</strong></p>
+<p><code>pip install --upgrade youtube-dl</code></p>
+<p><strong>youtube_dl常用命令行介绍</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">-f, --format FORMAT              Video format code, see the &quot;FORMAT</span><br><span class="line">                                 SELECTION&quot; for all the info</span><br><span class="line"></span><br><span class="line">--merge-output-format FORMAT     If a merge is required (e.g.</span><br><span class="line">                                 bestvideo+bestaudio), output to given</span><br><span class="line">                                 container format. One of mkv, mp4, ogg,</span><br><span class="line">                                 webm, flv. Ignored if no merge is required</span><br><span class="line"></span><br><span class="line">-F, --list-formats               List all available formats of requested</span><br><span class="line">                                 videos</span><br><span class="line"></span><br><span class="line">-a, --batch-file FILE            File containing URLs to download (&#39;-&#39; for</span><br><span class="line">                                 stdin)</span><br><span class="line"></span><br><span class="line">-o, --output TEMPLATE            Output filename template, see the &quot;OUTPUT</span><br><span class="line">                                 TEMPLATE&quot; for all the info    </span><br><span class="line"></span><br><span class="line">--list-extractors                List all supported extractors</span><br></pre></td></tr></table></figure></p>
+<span id="more"></span>
+<p><strong>输出文件名模板</strong></p>
+<p>Note: on Windows you may need to use double quotes instead of single.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># Download YouTube playlist videos in separate directory indexed by video order in a playlist</span><br><span class="line">$ youtube-dl -o &#39;%(playlist)s&#x2F;%(playlist_index)s - %(title)s.%(ext)s&#39; https:&#x2F;&#x2F;www.youtube.com&#x2F;playlist?list&#x3D;PLwiyx1dc3P2JR9N8gQaQN_BCvlSlap7re</span><br><span class="line"></span><br><span class="line"># Download all playlists of YouTube channel&#x2F;user keeping each playlist in separate directory:</span><br><span class="line">$ youtube-dl -o &#39;%(uploader)s&#x2F;%(playlist)s&#x2F;%(playlist_index)s - %(title)s.%(ext)s&#39; https:&#x2F;&#x2F;www.youtube.com&#x2F;user&#x2F;TheLinuxFoundation&#x2F;playlists</span><br><span class="line"></span><br><span class="line"># Download Udemy course keeping each chapter in separate directory under MyVideos directory in your home</span><br><span class="line">$ youtube-dl -u user -p password -o &#39;~&#x2F;MyVideos&#x2F;%(playlist)s&#x2F;%(chapter_number)s - %(chapter)s&#x2F;%(title)s.%(ext)s&#39; https:&#x2F;&#x2F;www.udemy.com&#x2F;java-tutorial&#x2F;</span><br><span class="line"></span><br><span class="line"># Download entire series season keeping each series and each season in separate directory under C:&#x2F;MyVideos</span><br><span class="line">$ youtube-dl -o &quot;C:&#x2F;MyVideos&#x2F;%(series)s&#x2F;%(season_number)s - %(season)s&#x2F;%(episode_number)s - %(episode)s.%(ext)s&quot; http:&#x2F;&#x2F;videomore.ru&#x2F;kino_v_detalayah&#x2F;5_sezon&#x2F;367617</span><br></pre></td></tr></table></figure>
+<p><strong>输出文件格式模板</strong></p>
+<p>网站上视频具有的下载格式可以通过<code>youtube-dl -F</code>查看可下载视频格式列表</p>
+<p>youtube-dl可以根据参数配置来确定视频下载格式</p>
+<p>Note: on Windows you may need to use double quotes instead of single.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"># Download best mp4 format available or any other best if no mp4 available</span><br><span class="line">$ youtube-dl -f &#39;bestvideo[ext&#x3D;mp4]+bestaudio[ext&#x3D;m4a]&#x2F;best[ext&#x3D;mp4]&#x2F;best&#39;</span><br><span class="line"></span><br><span class="line"># Download best format available but not better that 480p</span><br><span class="line">$ youtube-dl -f &#39;bestvideo[height&lt;&#x3D;480]+bestaudio&#x2F;best[height&lt;&#x3D;480]&#39;</span><br><span class="line"></span><br><span class="line"># Download best video only format but no bigger than 50 MB</span><br><span class="line">$ youtube-dl -f &#39;best[filesize&lt;50M]&#39;</span><br><span class="line"></span><br><span class="line"># Download best format available via direct link over HTTP&#x2F;HTTPS protocol</span><br><span class="line">$ youtube-dl -f &#39;(bestvideo+bestaudio&#x2F;best)[protocol^&#x3D;http]&#39;</span><br><span class="line"></span><br><span class="line"># Download the best video format and the best audio format without merging them</span><br><span class="line">$ youtube-dl -f &#39;bestvideo,bestaudio&#39; -o &#39;%(title)s.f%(format_id)s.%(ext)s&#39;</span><br></pre></td></tr></table></figure>
+<p><strong>开发者模式使用</strong></p>
+<p>youtube_dl在python代码中使用方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">from __future__ import unicode_literals ## for python2</span><br><span class="line">import youtube_dl</span><br><span class="line"></span><br><span class="line">ydl_opts &#x3D; &#123;&#125;</span><br><span class="line">with youtube_dl.YoutubeDL(ydl_opts) as ydl:</span><br><span class="line">    ydl.download([&#39;http:&#x2F;&#x2F;www.youtube.com&#x2F;watch?v&#x3D;BaW_jenozKc&#39;])</span><br></pre></td></tr></table></figure>
+<p>ydl_opts 配置可以在YoutubeDL.py中找到,for example</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">ydl_opts &#x3D; &#123;</span><br><span class="line">    ##Download best format available but not better that 720p</span><br><span class="line">    &#39;format&#39;: &#39;bestvideo[height&lt;&#x3D;720]+worstaudio[ext&#x3D;m4a]&#x2F;best[height&lt;&#x3D;720][ext&#x3D;mp4]&#39;,</span><br><span class="line">    &#39;merge_output_format&#39;: &#39;mp4&#39;,</span><br><span class="line">    &#39;outtmpl&#39;: &#39;.&#x2F;download&#x2F;%(title)s.%(ext)s&#39;,</span><br><span class="line">    #     # &#39;postprocessors&#39;: [&#123;</span><br><span class="line">    #     #    &#39;key&#39;: &#39;FFmpegExtractAudio&#39;,</span><br><span class="line">    #     #    &#39;preferredcodec&#39;: &#39;mp3&#39;,</span><br><span class="line">    #     #    &#39;preferredquality&#39;: &#39;192&#39;,</span><br><span class="line">    #     # &#125;],</span><br><span class="line">    #     # &#39;logger&#39;: MyLogger(),</span><br><span class="line">    #     #&#39;progress_hooks&#39;: [my_hook],</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="百度云盘同步工具bypy安装及其使用"><a href="#百度云盘同步工具bypy安装及其使用" class="headerlink" title="百度云盘同步工具bypy安装及其使用"></a>百度云盘同步工具bypy安装及其使用</h4><ul>
+<li>github地址 : <a target="_blank" rel="noopener" href="https://github.com/houtianze/bypy">bypy</a></li>
+</ul>
+<p><strong>利用pip安装bypy</strong></p>
+<ul>
+<li>通过pip安装<code>pip install bypy</code></li>
+</ul>
+<p><strong>bypy对百度云盘授权</strong></p>
+<p>第一次使用需要对百度云进行授权,运行任意命令即可进入百度云盘授权过程,通过给出url得到百度云盘的授权码.</p>
+<p>如果需要重置授权,运行<code>bypy -c</code>即可进入重置授权</p>
+<p><strong>bypy命令行使用</strong></p>
+<p>显示在云盘（程序的）根目录下文件列表：<code>bypy list</code></p>
+<p>把当前目录同步到云盘：<code>bypy syncup</code> or <code>bypy upload</code></p>
+<p>把云盘内容同步到本地来：<code>bypy syncdown</code> or <code>bypy downdir /</code></p>
+<p>比较本地当前目录和云盘（程序的）根目录：<code>bypy compare</code></p>
+<p><strong>bypy代码运行</strong><br>在python代码中运行bypy</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import bypy</span><br><span class="line">        by &#x3D; bypy.ByPy()</span><br><span class="line">            by.syncup(fromdir,todir)</span><br></pre></td></tr></table></figure>
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Django/" rel="tag"># Django</a>
+              <a href="/tags/Python/" rel="tag"># Python</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2016/11/21/2016-11-21-Tensorflow%E5%AD%A6%E4%B9%A0-%E4%BA%8C-Softmax%E6%A8%A1%E5%9E%8B/" rel="prev" title="Tensorflow学习(二)Softmax模型">
+                  <i class="fa fa-chevron-left"></i> Tensorflow学习(二)Softmax模型
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/02/27/2017-02-27-%E5%9C%A8%E7%BA%BF%E8%A7%86%E9%A2%91%E7%88%AC%E8%99%AB%E4%B8%8E%E7%99%BE%E5%BA%A6%E4%BA%91%E7%9B%98%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1%E5%8F%8A%E5%85%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9E%B6%E8%AE%BE-%E4%BA%8C/" rel="next" title="在线视频爬虫与百度云盘同步服务及其服务器架设(二)">
+                  在线视频爬虫与百度云盘同步服务及其服务器架设(二) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cheochen</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({{ JSON.stringify(config) }});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="{{ src }}">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

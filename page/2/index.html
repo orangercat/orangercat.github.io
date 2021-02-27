@@ -1,23 +1,1143 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
 
-{% block title %} {{ config.title }} {% endblock %}
 
-{% block page_class %}
-  {% if is_home() %} page-home {% endif %}
-{% endblock %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block content %}
-  <section id="posts" class="posts-expand">
-    {% for post in page.posts %}
-      {{ post_template.render(post, true) }}
-    {% endfor %}
-  </section>
+<link rel="stylesheet" href="/css/main.css">
 
-  {% include '_partials/pagination.swig' %}
-{% endblock %}
 
-{% block sidebar %}
-  {{ sidebar_template.render(false) }}
-{% endblock %}
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
+
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"orangercat.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+<meta name="description" content="learn more, try more, do more.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="喵窝">
+<meta property="og:url" content="http://orangercat.github.io/page/2/index.html">
+<meta property="og:site_name" content="喵窝">
+<meta property="og:description" content="learn more, try more, do more.">
+<meta property="og:locale">
+<meta property="article:author" content="cheochen">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://orangercat.github.io/page/2/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-Hans'
+  };
+</script>
+<title>喵窝</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">喵窝</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nice to see u</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-overview-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cheochen</p>
+  <div class="site-description" itemprop="description">learn more, try more, do more.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner index posts-expand">
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://orangercat.github.io/2017/04/23/2017-04-23-redmine%E7%BB%93%E5%90%88gitlab%E5%AE%9E%E7%8E%B0%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cheochen">
+      <meta itemprop="description" content="learn more, try more, do more.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="喵窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/04/23/2017-04-23-redmine%E7%BB%93%E5%90%88gitlab%E5%AE%9E%E7%8E%B0%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/" class="post-title-link" itemprop="url">redmine结合gitlab实现项目管理</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2017-04-23 22:22:16 / Modified: 22:37:25" itemprop="dateCreated datePublished" datetime="2017-04-23T22:22:16+08:00">2017-04-23</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Web/" itemprop="url" rel="index"><span itemprop="name">Web</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="业务需求"><a href="#业务需求" class="headerlink" title="业务需求"></a>业务需求</h4><p>目前通过redmine来进行项目管理,包括任务的分配与时间进度管理,现在需要利用git来进行版本管理,于是架设了Gitlab来进行代码管理,我们需要实现的功能包括:</p>
+<ul>
+<li>在创建的新项目中，定义git仓库，当代码发生修改的时候，redmine上能够订阅整个过程，并显示出来，其他同事关注项目的同时，也能看到代码的变化。</li>
+<li>当新的开发需求被提出来的时候，代码修改提交之后，带配置中的关键字，redmine检测到时，能改变项目的完成状态，不需要手动去更改</li>
+<li>redmine在读取gitlab变化时，需要读取git的路径，这时，可以使用–mirror参数，拷贝git仓库</li>
+</ul>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://orangercat.github.io/2017/03/30/2017-03-30-ubuntu%E5%A2%9E%E5%8A%A0swap%E5%8C%BA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cheochen">
+      <meta itemprop="description" content="learn more, try more, do more.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="喵窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/03/30/2017-03-30-ubuntu%E5%A2%9E%E5%8A%A0swap%E5%8C%BA/" class="post-title-link" itemprop="url">ubuntu增加swap区</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-03-30 16:39:48" itemprop="dateCreated datePublished" datetime="2017-03-30T16:39:48+08:00">2017-03-30</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2017-04-23 13:10:32" itemprop="dateModified" datetime="2017-04-23T13:10:32+08:00">2017-04-23</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/ubuntu/" itemprop="url" rel="index"><span itemprop="name">ubuntu</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="查看系统的swap信息"><a href="#查看系统的swap信息" class="headerlink" title="查看系统的swap信息"></a>查看系统的swap信息</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo swapon -s   &#x2F;&#x2F; 或 sudo free -m 、sudo swapon --show</span><br></pre></td></tr></table></figure>
+<h4 id="查看硬盘分区的可用空间"><a href="#查看硬盘分区的可用空间" class="headerlink" title="查看硬盘分区的可用空间"></a>查看硬盘分区的可用空间</h4><p>典型的做法是为swap单独创建一个分区，但是有时这是不可能完成的任务（像vps）。但是我们可以在已有的分区上创建swap文件。<br>查看分区信息方法命令：<code>df -h</code><br>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/03/30/2017-03-30-ubuntu%E5%A2%9E%E5%8A%A0swap%E5%8C%BA/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://orangercat.github.io/2017/03/30/2017-03-30-ubuntu16-04LTS%E5%AE%89%E8%A3%85redmine/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cheochen">
+      <meta itemprop="description" content="learn more, try more, do more.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="喵窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/03/30/2017-03-30-ubuntu16-04LTS%E5%AE%89%E8%A3%85redmine/" class="post-title-link" itemprop="url">ubuntu16.04LTS安装redmine</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-03-30 14:05:23" itemprop="dateCreated datePublished" datetime="2017-03-30T14:05:23+08:00">2017-03-30</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2017-09-27 11:34:10" itemprop="dateModified" datetime="2017-09-27T11:34:10+08:00">2017-09-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Ruby/" itemprop="url" rel="index"><span itemprop="name">Ruby</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="redmine介绍"><a href="#redmine介绍" class="headerlink" title="redmine介绍"></a>redmine介绍</h4><p>Redmine是用Ruby开发的基于web的项目管理软件，是用ROR框架开发的一套跨平台项目管理系统.</p>
+<h4 id="系统安装环境"><a href="#系统安装环境" class="headerlink" title="系统安装环境"></a>系统安装环境</h4><p>ubuntu server 16.04 LTS<br>腾讯云标准S1: 1核1GB<br>root 权限<br>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/03/30/2017-03-30-ubuntu16-04LTS%E5%AE%89%E8%A3%85redmine/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://orangercat.github.io/2017/03/10/2017-03-10-scrapy%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cheochen">
+      <meta itemprop="description" content="learn more, try more, do more.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="喵窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/03/10/2017-03-10-scrapy%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/" class="post-title-link" itemprop="url">scrapy学习笔记</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-03-10 15:16:18" itemprop="dateCreated datePublished" datetime="2017-03-10T15:16:18+08:00">2017-03-10</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2017-03-21 17:51:59" itemprop="dateModified" datetime="2017-03-21T17:51:59+08:00">2017-03-21</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="部署Scrapy"><a href="#部署Scrapy" class="headerlink" title="部署Scrapy"></a>部署Scrapy</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/03/10/2017-03-10-scrapy%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://orangercat.github.io/2017/02/27/2017-02-27-%E5%9C%A8%E7%BA%BF%E8%A7%86%E9%A2%91%E7%88%AC%E8%99%AB%E4%B8%8E%E7%99%BE%E5%BA%A6%E4%BA%91%E7%9B%98%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1%E5%8F%8A%E5%85%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9E%B6%E8%AE%BE-%E4%BA%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cheochen">
+      <meta itemprop="description" content="learn more, try more, do more.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="喵窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/02/27/2017-02-27-%E5%9C%A8%E7%BA%BF%E8%A7%86%E9%A2%91%E7%88%AC%E8%99%AB%E4%B8%8E%E7%99%BE%E5%BA%A6%E4%BA%91%E7%9B%98%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1%E5%8F%8A%E5%85%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9E%B6%E8%AE%BE-%E4%BA%8C/" class="post-title-link" itemprop="url">在线视频爬虫与百度云盘同步服务及其服务器架设(二)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-02-27 16:11:12" itemprop="dateCreated datePublished" datetime="2017-02-27T16:11:12+08:00">2017-02-27</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2017-03-21 17:52:12" itemprop="dateModified" datetime="2017-03-21T17:52:12+08:00">2017-03-21</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Python-Web/" itemprop="url" rel="index"><span itemprop="name">Python,Web</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="Nginx部署"><a href="#Nginx部署" class="headerlink" title="Nginx部署"></a>Nginx部署</h3><p>在ubunt下面安装nginx</p>
+<p><code>sudo apt-get install nginx  #安装</code></p>
+<p>nginx操作</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">service nginx start #运行nginx</span><br><span class="line">service nginx stop #停止nginx</span><br><span class="line">service nginx restart #重新运行nginx</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/02/27/2017-02-27-%E5%9C%A8%E7%BA%BF%E8%A7%86%E9%A2%91%E7%88%AC%E8%99%AB%E4%B8%8E%E7%99%BE%E5%BA%A6%E4%BA%91%E7%9B%98%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1%E5%8F%8A%E5%85%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9E%B6%E8%AE%BE-%E4%BA%8C/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://orangercat.github.io/2017/02/25/2017-02-25-%E5%9C%A8%E7%BA%BF%E8%A7%86%E9%A2%91%E7%88%AC%E8%99%AB%E4%B8%8E%E7%99%BE%E5%BA%A6%E4%BA%91%E7%9B%98%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1%E5%8F%8A%E5%85%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9E%B6%E8%AE%BE-%E4%B8%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cheochen">
+      <meta itemprop="description" content="learn more, try more, do more.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="喵窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2017/02/25/2017-02-25-%E5%9C%A8%E7%BA%BF%E8%A7%86%E9%A2%91%E7%88%AC%E8%99%AB%E4%B8%8E%E7%99%BE%E5%BA%A6%E4%BA%91%E7%9B%98%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1%E5%8F%8A%E5%85%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9E%B6%E8%AE%BE-%E4%B8%80/" class="post-title-link" itemprop="url">在线视频爬虫与百度云盘同步服务及其服务器架设(一)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-02-25 18:48:42" itemprop="dateCreated datePublished" datetime="2017-02-25T18:48:42+08:00">2017-02-25</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2017-02-27 11:17:05" itemprop="dateModified" datetime="2017-02-27T11:17:05+08:00">2017-02-27</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Python-Web/" itemprop="url" rel="index"><span itemprop="name">Python,Web</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h4 id="在线视频爬虫下载工具youtube-dl安装及其使用"><a href="#在线视频爬虫下载工具youtube-dl安装及其使用" class="headerlink" title="在线视频爬虫下载工具youtube_dl安装及其使用"></a>在线视频爬虫下载工具youtube_dl安装及其使用</h4><ul>
+<li>github地址 : <a target="_blank" rel="noopener" href="https://github.com/rg3/youtube-dl">youtube_dl</a></li>
+</ul>
+<p><strong>利用python管理工具pip安装</strong></p>
+<p><code>pip install --upgrade youtube-dl</code></p>
+<p><strong>youtube_dl常用命令行介绍</strong><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">-f, --format FORMAT              Video format code, see the &quot;FORMAT</span><br><span class="line">                                 SELECTION&quot; for all the info</span><br><span class="line"></span><br><span class="line">--merge-output-format FORMAT     If a merge is required (e.g.</span><br><span class="line">                                 bestvideo+bestaudio), output to given</span><br><span class="line">                                 container format. One of mkv, mp4, ogg,</span><br><span class="line">                                 webm, flv. Ignored if no merge is required</span><br><span class="line"></span><br><span class="line">-F, --list-formats               List all available formats of requested</span><br><span class="line">                                 videos</span><br><span class="line"></span><br><span class="line">-a, --batch-file FILE            File containing URLs to download (&#39;-&#39; for</span><br><span class="line">                                 stdin)</span><br><span class="line"></span><br><span class="line">-o, --output TEMPLATE            Output filename template, see the &quot;OUTPUT</span><br><span class="line">                                 TEMPLATE&quot; for all the info    </span><br><span class="line"></span><br><span class="line">--list-extractors                List all supported extractors</span><br></pre></td></tr></table></figure></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2017/02/25/2017-02-25-%E5%9C%A8%E7%BA%BF%E8%A7%86%E9%A2%91%E7%88%AC%E8%99%AB%E4%B8%8E%E7%99%BE%E5%BA%A6%E4%BA%91%E7%9B%98%E5%90%8C%E6%AD%A5%E6%9C%8D%E5%8A%A1%E5%8F%8A%E5%85%B6%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%9E%B6%E8%AE%BE-%E4%B8%80/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://orangercat.github.io/2016/11/21/2016-11-21-Tensorflow%E5%AD%A6%E4%B9%A0-%E4%BA%8C-Softmax%E6%A8%A1%E5%9E%8B/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cheochen">
+      <meta itemprop="description" content="learn more, try more, do more.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="喵窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2016/11/21/2016-11-21-Tensorflow%E5%AD%A6%E4%B9%A0-%E4%BA%8C-Softmax%E6%A8%A1%E5%9E%8B/" class="post-title-link" itemprop="url">Tensorflow学习(二)Softmax模型</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2016-11-21 11:14:19 / Modified: 11:37:37" itemprop="dateCreated datePublished" datetime="2016-11-21T11:14:19+08:00">2016-11-21</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p><script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"><br></script><br>github 参考地址 <a target="_blank" rel="noopener" href="https://github.com/orangercat/Tensorflow_learning">https://github.com/orangercat/Tensorflow_learning</a></p>
+<h3 id="MINST数据集介绍"><a href="#MINST数据集介绍" class="headerlink" title="MINST数据集介绍"></a>MINST数据集介绍</h3><p>MNIST是一个标准的手写字符测试集，收集者是人工智能领域著名的科学家，现在最火的深度学习网络Convulution Nueral Networks的创始人，现任Facebook AI实验室的主任 – Yann LeCun</p>
+<p>下载MNIST数据集,数据在 <a target="_blank" rel="noopener" href="http://yann.lecun.com/exdb/mnist/">http://yann.lecun.com/exdb/mnist/</a> 上</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2016/11/21/2016-11-21-Tensorflow%E5%AD%A6%E4%B9%A0-%E4%BA%8C-Softmax%E6%A8%A1%E5%9E%8B/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://orangercat.github.io/2016/11/01/2016-11-01-Tensorflow%E5%AD%A6%E4%B9%A0-%E4%B8%80/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cheochen">
+      <meta itemprop="description" content="learn more, try more, do more.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="喵窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2016/11/01/2016-11-01-Tensorflow%E5%AD%A6%E4%B9%A0-%E4%B8%80/" class="post-title-link" itemprop="url">Tensorflow学习(一)</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2016-11-01 16:28:31 / Modified: 16:42:07" itemprop="dateCreated datePublished" datetime="2016-11-01T16:28:31+08:00">2016-11-01</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="Tensorflow-介绍"><a href="#Tensorflow-介绍" class="headerlink" title="Tensorflow 介绍"></a>Tensorflow 介绍</h3><p>Tensorflow是Google发布的人工智能系统.<br>软件可以从大量数据来判断未来情况的趋势.<br>英文官方网站：<br><a target="_blank" rel="noopener" href="http://tensorflow.org/">http://tensorflow.org/</a></p>
+<p>官方GitHub仓库：<br><a target="_blank" rel="noopener" href="https://github.com/tensorflow/tensorflow">https://github.com/tensorflow/tensorflow</a></p>
+<p>中文版 GitHub 仓库：<br><a target="_blank" rel="noopener" href="https://github.com/jikexueyuanwiki/tensorflow-zh">https://github.com/jikexueyuanwiki/tensorflow-zh</a></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2016/11/01/2016-11-01-Tensorflow%E5%AD%A6%E4%B9%A0-%E4%B8%80/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://orangercat.github.io/2016/09/16/2016-09-16-vps%E5%AE%89%E8%A3%85L2tP-%E8%A7%A3%E5%86%B3ios10%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5PPTP-VPN/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cheochen">
+      <meta itemprop="description" content="learn more, try more, do more.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="喵窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2016/09/16/2016-09-16-vps%E5%AE%89%E8%A3%85L2tP-%E8%A7%A3%E5%86%B3ios10%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5PPTP-VPN/" class="post-title-link" itemprop="url">vps安装L2tP-解决ios10无法连接PPTP VPN</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-09-16 17:06:17" itemprop="dateCreated datePublished" datetime="2016-09-16T17:06:17+08:00">2016-09-16</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2017-07-14 22:46:50" itemprop="dateModified" datetime="2017-07-14T22:46:50+08:00">2017-07-14</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/VPN/" itemprop="url" rel="index"><span itemprop="name">VPN</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><p>IOS10更新后,Apple把VPN的PPTP给删了,目前只能使用IKEV2,IPSec,L2TP三种类型.以前是在DigtialOcean上架设的PPTP VPN,所以在网上寻找是否有架设L2TP的文章.</p>
+<h2 id="感谢好心人"><a href="#感谢好心人" class="headerlink" title="感谢好心人"></a>感谢好心人</h2><p>找到秋水大大的一键安装脚本 <a target="_blank" rel="noopener" href="https://teddysun.com/448.html">L2TP/IPSec一键安装脚本</a></p>
+<p>目前DigtialOcean上ubuntu14.04正常安装</p>
+<p><a target="_blank" rel="noopener" href="https://m.do.co/c/0c454d77c614">DigtialOcean传送门,新用户有优惠</a></p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2016/09/16/2016-09-16-vps%E5%AE%89%E8%A3%85L2tP-%E8%A7%A3%E5%86%B3ios10%E6%97%A0%E6%B3%95%E8%BF%9E%E6%8E%A5PPTP-VPN/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://orangercat.github.io/2016/08/31/python-super-review/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cheochen">
+      <meta itemprop="description" content="learn more, try more, do more.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="喵窝">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2016/08/31/python-super-review/" class="post-title-link" itemprop="url">Python super() review</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2016-08-31 13:04:53" itemprop="dateCreated datePublished" datetime="2016-08-31T13:04:53+08:00">2016-08-31</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2016-09-02 16:42:27" itemprop="dateModified" datetime="2016-09-02T16:42:27+08:00">2016-09-02</time>
+      </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h3 id="super-作用"><a href="#super-作用" class="headerlink" title="super()作用"></a>super()作用</h3><p> 1.<code>super()</code>本质也就是类,关键点在<code>super()</code>是引用的哪个类?<br> 2.<code>super()</code>与直接引用父类的区别在于:当父类是唯一的并且只有1层的时候,是相同的,但是如果父类有2层以上并且不是一一对应的情况,<br>    用<code>super()</code>比较合适,并且不会因为调用子类的时候,不会重复调用父类中的父类<br> 3.如下举例:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Root</span>(<span class="params"><span class="built_in">object</span></span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        print(<span class="string">&quot;this is Root&quot;</span>)</span><br><span class="line">  </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">B</span>(<span class="params">Root</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        print(<span class="string">&quot;enter B&quot;</span>)</span><br><span class="line">        <span class="comment"># print(self)  # this will print &lt;__main__.D object at 0x...&gt;</span></span><br><span class="line">        <span class="built_in">super</span>(B, self).__init__()</span><br><span class="line">        print(<span class="string">&quot;leave B&quot;</span>)</span><br><span class="line">    </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">C</span>(<span class="params">Root</span>):</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span>(<span class="params">self</span>):</span></span><br><span class="line">        print(<span class="string">&quot;enter C&quot;</span>)</span><br><span class="line">        <span class="built_in">super</span>(C, self).__init__()</span><br><span class="line">        print(<span class="string">&quot;leave C&quot;</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">D</span>(<span class="params">B, C</span>):</span></span><br><span class="line"></span><br><span class="line">d = D()</span><br><span class="line">print(d.__class__.__mro__)</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<pre><code>在输入 D()函数以后,调用 B(),C(),其中 B()调用 super(),按照 python中含义,super()调用的并不是指他的父函数,即 Root(), 
+而是在 D()的 mro顺序中,调用 B()的 index+1,即 C(),然后调用 Root(), 用 super()形成的子类D(),调用的优势在于,在调用 B(),
+C()以后不会重复调用 B(),C()中的super()类,在多层继承的类中,可以防止基类的重复调用.
+</code></pre><h3 id="重点"><a href="#重点" class="headerlink" title="重点"></a>重点</h3><pre><code>1. spuer()不是单指父函数,主要作用是在多层继承中
+2. super()函数本质是需要理解class的mro
+</code></pre><p>参考文章:<br>    <a target="_blank" rel="noopener" href="https://rhettinger.wordpress.com/2011/05/26/super-considered-super/">super-considered-super</a></p>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
+  </nav>
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cheochen</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({{ JSON.stringify(config) }});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="{{ src }}">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

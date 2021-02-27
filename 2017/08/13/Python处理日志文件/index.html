@@ -1,38 +1,403 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
 
 
-{% block title %} {{ page.title }} | {{ config.title }} {% endblock %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block page_class %}page-post-detail{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"orangercat.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+<meta name="description" content="背景公司视频应用,需要针对用户的操作数据分析,得出应用内所有的视频的权重分析,方便以后更好的进行推荐视频操作.目前已有的log格式主要有: 123action             vid           uidview video      video_001        NaNplay video      video_001       user_00x 用户分为注册用户与游客两种,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python处理日志文件">
+<meta property="og:url" content="http://orangercat.github.io/2017/08/13/Python%E5%A4%84%E7%90%86%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/index.html">
+<meta property="og:site_name" content="喵窝">
+<meta property="og:description" content="背景公司视频应用,需要针对用户的操作数据分析,得出应用内所有的视频的权重分析,方便以后更好的进行推荐视频操作.目前已有的log格式主要有: 123action             vid           uidview video      video_001        NaNplay video      video_001       user_00x 用户分为注册用户与游客两种,">
+<meta property="og:locale">
+<meta property="og:image" content="http://orangercat.github.io/2017/08/13/images/output_5_0.png">
+<meta property="article:published_time" content="2017-08-13T01:01:33.000Z">
+<meta property="article:modified_time" content="2017-08-15T06:18:29.000Z">
+<meta property="article:author" content="cheochen">
+<meta property="article:tag" content="数据处理,数据分析">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://orangercat.github.io/2017/08/13/images/output_5_0.png">
+
+
+<link rel="canonical" href="http://orangercat.github.io/2017/08/13/Python%E5%A4%84%E7%90%86%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+<title>Python处理日志文件 | 喵窝</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
     </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">喵窝</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nice to see u</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%83%8C%E6%99%AF"><span class="nav-number">1.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B8%85%E6%B4%97%E6%95%B0%E6%8D%AE"><span class="nav-number">2.</span> <span class="nav-text">清洗数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%92%88%E5%AF%B9%E7%94%9F%E6%88%90%E7%9A%84%E6%95%B0%E6%8D%AE%E8%BF%9B%E8%A1%8C%E5%88%86%E6%9E%90"><span class="nav-number">3.</span> <span class="nav-text">针对生成的数据进行分析</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cheochen</p>
+  <div class="site-description" itemprop="description">learn more, try more, do more.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://orangercat.github.io/2017/08/13/Python%E5%A4%84%E7%90%86%E6%97%A5%E5%BF%97%E6%96%87%E4%BB%B6/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cheochen">
+      <meta itemprop="description" content="learn more, try more, do more.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="喵窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Python处理日志文件
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-08-13 09:01:33" itemprop="dateCreated datePublished" datetime="2017-08-13T09:01:33+08:00">2017-08-13</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2017-08-15 14:18:29" itemprop="dateModified" datetime="2017-08-15T14:18:29+08:00">2017-08-15</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <h4 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h4><p>公司视频应用,需要针对用户的操作数据分析,得出应用内所有的视频的权重分析,方便以后更好的进行推荐视频操作.目前已有的log格式主要有:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">action             vid           uid</span><br><span class="line">view video      video_001        NaN</span><br><span class="line">play video      video_001       user_00x</span><br></pre></td></tr></table></figure>
+<p>用户分为注册用户与游客两种,操作主要有<code>view,like,comment,upload,download</code>几种.为了方便处理,第一阶段只考虑针对游客访问的视频进行处理.这样形成一个只有<code>action</code>与<code>uid</code>的字典形式.处理数据主要使用<code>python</code>的<code>pandas</code>库.</p>
+ <span id="more"></span>
+<h4 id="清洗数据"><a href="#清洗数据" class="headerlink" title="清洗数据"></a>清洗数据</h4><p>日志初期action包括<code>view,like,comment,upload</code>,<code>uid</code>包括用户id以及代表游客的NaN空值.第一步需要把这些action具体量化,为了简单量化初期:<code>view = 1 , like = 2 , comment = 3 , upload = 3 , download = 3</code>.日志文件以<code>csv</code>格式存储.导入数据后进行处理:</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="comment"># pandas读取csv</span></span><br><span class="line">data = pd.read_csv(<span class="string">&#x27;data.csv&#x27;</span>)</span><br><span class="line"><span class="comment"># action为playvideo的设置为1,即打分为1</span></span><br><span class="line">data.loc[data[<span class="string">&#x27;action&#x27;</span>]==<span class="string">&#x27;playvideo&#x27;</span>,<span class="string">&#x27;action&#x27;</span>]=<span class="number">1</span></span><br><span class="line"><span class="comment"># 把NaN(即游客)值重置为0</span></span><br><span class="line">data=data.fillna(value = <span class="string">&#x27;0&#x27;</span>)</span><br><span class="line"><span class="comment"># 过滤出uid值为0的数据</span></span><br><span class="line">tourist_data = data.loc[data[<span class="string">&#x27;uid&#x27;</span>]==<span class="string">&#x27;0&#x27;</span>]</span><br><span class="line"><span class="keyword">del</span> tourist_data[<span class="string">&#x27;uid&#x27;</span>]</span><br><span class="line"><span class="comment"># tourist_data为action与uic的矩阵</span></span><br></pre></td></tr></table></figure>
+<p>DataFrame如下</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">   action                               vid</span><br><span class="line"><span class="number">0</span>       <span class="number">1</span>  2c9f91345c3ed855015c5ee9cb904681</span><br><span class="line"><span class="number">1</span>       <span class="number">1</span>  2c9f91345c3ed855015c52649f962d4f</span><br><span class="line"><span class="number">2</span>      -<span class="number">1</span>  2c9f91345c2007f8015c2deee14c18cb</span><br><span class="line"><span class="number">3</span>       <span class="number">1</span>  2c9f91345c3ed855015c5ee9cb904681</span><br><span class="line"><span class="number">4</span>       <span class="number">3</span>  2c9f91345c2007f8015c2deee14c18cb</span><br></pre></td></tr></table></figure>
+<p>针对这个数据,需要进行清洗.找出重复的vid,并相加对应的action.得出的矩阵就是需要的vid的score排列.<br>首先DataFrame生成vid的list<br><code>vid_list=tourist_data[&#39;vid&#39;].values.tolist()</code><br>问题分解为寻找list中重复的数值,并把数值对应的index记录下来.需要用到两个库<code>enumerate</code>与<code>defaultdict</code><br><code>enumerate</code>可以把list生成带有index的dict<br><code>defaultdict</code>可以对list形成的dict进行统计处理</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成带有index的列表</span></span><br><span class="line">In [<span class="number">189</span>]: [(v,i) <span class="keyword">for</span> i,v <span class="keyword">in</span> <span class="built_in">enumerate</span>(vid_list)]</span><br><span class="line">Out[<span class="number">189</span>]:</span><br><span class="line">[(<span class="string">&#x27;2c9f91345c3ed855015c5ee9cb904681&#x27;</span>, <span class="number">0</span>),</span><br><span class="line"> (<span class="string">&#x27;2c9f91345c3ed855015c52649f962d4f&#x27;</span>, <span class="number">1</span>),</span><br><span class="line"> (<span class="string">&#x27;2c9f91345c2007f8015c2deee14c18cb&#x27;</span>, <span class="number">2</span>),</span><br><span class="line"> (<span class="string">&#x27;2c9f91345c3ed855015c5ee9cb904681&#x27;</span>, <span class="number">3</span>),</span><br><span class="line"> (<span class="string">&#x27;2c9f91345c2007f8015c2deee14c18cb&#x27;</span>, <span class="number">4</span>),</span><br><span class="line"> (<span class="string">&#x27;2c9f91345c3ed855015c52649f962d4f&#x27;</span>, <span class="number">5</span>),</span><br><span class="line"> (<span class="string">&#x27;2c9f91345c2007f8015c2deee14c18cb&#x27;</span>, <span class="number">6</span>),</span><br><span class="line"> (<span class="string">&#x27;2c9f91345bf13cac015bfce28ef31002&#x27;</span>, <span class="number">7</span>),</span><br><span class="line"> (<span class="string">&#x27;2c9f91345c3ed855015c5ee9cb904681&#x27;</span>, <span class="number">8</span>),</span><br><span class="line"> (<span class="string">&#x27;2c9f91345c3ed855015c52649f962d4f&#x27;</span>, <span class="number">9</span>)]</span><br><span class="line"></span><br><span class="line"><span class="comment"># 利用defaultdict生成对重复vid处理后的dict</span></span><br><span class="line">In [<span class="number">190</span>]: vid_dict = defaultdict(<span class="built_in">list</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">191</span>]: <span class="keyword">for</span> key, value <span class="keyword">in</span> [(v, i) <span class="keyword">for</span> i, v <span class="keyword">in</span> <span class="built_in">enumerate</span>(vid_list)]:</span><br><span class="line">     ...:   vid_dict[key].append(value)</span><br><span class="line">     ...:</span><br><span class="line"></span><br><span class="line">In [<span class="number">192</span>]: vid_dict</span><br><span class="line">Out[<span class="number">192</span>]:</span><br><span class="line">defaultdict(<span class="built_in">list</span>,</span><br><span class="line">            &#123;<span class="string">&#x27;2c9f91345bf13cac015bfce28ef31002&#x27;</span>: [<span class="number">7</span>],</span><br><span class="line">             <span class="string">&#x27;2c9f91345c2007f8015c2deee14c18cb&#x27;</span>: [<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>],</span><br><span class="line">             <span class="string">&#x27;2c9f91345c3ed855015c52649f962d4f&#x27;</span>: [<span class="number">1</span>, <span class="number">5</span>, <span class="number">9</span>],</span><br><span class="line">             <span class="string">&#x27;2c9f91345c3ed855015c5ee9cb904681&#x27;</span>: [<span class="number">0</span>, <span class="number">3</span>, <span class="number">8</span>]&#125;)</span><br></pre></td></tr></table></figure>
+<p><code>vid</code>对应的list即为对应的index位置,利用index位置就可以为score_list进行处理累加</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 生成score list</span></span><br><span class="line">score_list = tourist_data[<span class="string">&#x27;action&#x27;</span>].values.tolist()</span><br><span class="line">In [<span class="number">222</span>]: vid_dict = defaultdict(<span class="built_in">list</span>)</span><br><span class="line"></span><br><span class="line">In [<span class="number">223</span>]: <span class="keyword">for</span> key, value <span class="keyword">in</span> [(v, i) <span class="keyword">for</span> i, v <span class="keyword">in</span> <span class="built_in">enumerate</span>(vid_list)]:</span><br><span class="line">     ...:     vid_dict[key].append(value)</span><br><span class="line"></span><br><span class="line">In [<span class="number">224</span>]: vid_dict</span><br><span class="line">Out[<span class="number">224</span>]:</span><br><span class="line">defaultdict(<span class="built_in">list</span>,</span><br><span class="line">            &#123;<span class="string">&#x27;2c9f91345bf13cac015bfce28ef31002&#x27;</span>: [<span class="number">7</span>],</span><br><span class="line">             <span class="string">&#x27;2c9f91345c2007f8015c2deee14c18cb&#x27;</span>: [<span class="number">2</span>, <span class="number">4</span>, <span class="number">6</span>],</span><br><span class="line">             <span class="string">&#x27;2c9f91345c3ed855015c52649f962d4f&#x27;</span>: [<span class="number">1</span>, <span class="number">5</span>, <span class="number">9</span>],</span><br><span class="line">             <span class="string">&#x27;2c9f91345c3ed855015c5ee9cb904681&#x27;</span>: [<span class="number">0</span>, <span class="number">3</span>, <span class="number">8</span>]&#125;)</span><br><span class="line">In [<span class="number">227</span>]: rank_list=[]</span><br><span class="line">     ...: <span class="keyword">for</span> i <span class="keyword">in</span> vid_dict:</span><br><span class="line">     ...:     score = <span class="number">0</span></span><br><span class="line">     ...:     <span class="keyword">for</span> index <span class="keyword">in</span> vid_dict[i]:</span><br><span class="line">     ...:         score += <span class="built_in">int</span>(score_list[index])</span><br><span class="line">     ...:     rank_list.append(score)</span><br><span class="line"></span><br><span class="line">In [<span class="number">231</span>]: vid_list = []</span><br><span class="line"></span><br><span class="line">In [<span class="number">232</span>]: <span class="keyword">for</span> i <span class="keyword">in</span> vid_dict:</span><br><span class="line">     ...:     vid_list.append(i)</span><br><span class="line">In [<span class="number">233</span>]: vid_list</span><br><span class="line">Out[<span class="number">233</span>]:</span><br><span class="line">[<span class="string">&#x27;2c9f91345bf13cac015bfce28ef31002&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;2c9f91345c2007f8015c2deee14c18cb&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;2c9f91345c3ed855015c5ee9cb904681&#x27;</span>,</span><br><span class="line"> <span class="string">&#x27;2c9f91345c3ed855015c52649f962d4f&#x27;</span>]</span><br><span class="line"></span><br><span class="line">In [<span class="number">234</span>]: rank_list</span><br><span class="line">Out[<span class="number">234</span>]: [<span class="number">1</span>, <span class="number">4</span>, <span class="number">5</span>, <span class="number">3</span>]</span><br><span class="line">In [<span class="number">237</span>]: vid_score = pd.DataFrame(&#123;<span class="string">&#x27;score&#x27;</span>:rank_list,<span class="string">&#x27;vid&#x27;</span>:vid_list&#125;)</span><br></pre></td></tr></table></figure>
+<p>生成<code>score</code>与<code>vid</code>的矩阵</p>
+<h4 id="针对生成的数据进行分析"><a href="#针对生成的数据进行分析" class="headerlink" title="针对生成的数据进行分析"></a>针对生成的数据进行分析</h4><p>使用altair对数据进行画图分析</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 导入csv文件</span></span><br><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"><span class="keyword">from</span> altair <span class="keyword">import</span> Chart, load_dataset</span><br><span class="line">%matplotlib inline</span><br><span class="line">vids_score = pd.read_csv(<span class="string">&#x27;./res/vid_score.csv&#x27;</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bins = [<span class="number">0</span>, <span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>, <span class="number">40</span>, <span class="number">50</span>,<span class="number">60</span>,<span class="number">70</span>,<span class="number">80</span>,<span class="number">90</span>, <span class="number">100</span>,<span class="number">150</span>,<span class="number">200</span>,<span class="number">300</span>,<span class="number">400</span>,<span class="number">500</span>,<span class="number">1000</span>,<span class="number">1500</span>]</span><br><span class="line">scores = pd.cut(vids_score[<span class="string">&#x27;score&#x27;</span>], bins)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">get_stats</span>(<span class="params">group</span>):</span></span><br><span class="line">    <span class="keyword">return</span> &#123;<span class="string">&#x27;count&#x27;</span>: group.count()&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">grouped = vids_score[<span class="string">&#x27;score&#x27;</span>].groupby(scores)</span><br><span class="line">bin_counts = grouped.apply(get_stats).unstack()</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">bin_counts</span><br><span class="line">bin_counts.index = [<span class="string">&#x27;0~10&#x27;</span>, <span class="string">&#x27;10~20&#x27;</span>, <span class="string">&#x27;20~30&#x27;</span>, <span class="string">&#x27;30~40&#x27;</span>, <span class="string">&#x27;40~50&#x27;</span>, <span class="string">&#x27;50~60&#x27;</span>, <span class="string">&#x27;60~70&#x27;</span>,</span><br><span class="line">                    <span class="string">&#x27;70~80&#x27;</span>, <span class="string">&#x27;80~90&#x27;</span>, <span class="string">&#x27;90~100&#x27;</span>,<span class="string">&#x27;100-150&#x27;</span>,<span class="string">&#x27;150-200&#x27;</span>,<span class="string">&#x27;200-300&#x27;</span>,<span class="string">&#x27;300-400&#x27;</span>,<span class="string">&#x27;400-500&#x27;</span>,<span class="string">&#x27;500-1000&#x27;</span>,<span class="string">&#x27;1000-1500&#x27;</span>]</span><br><span class="line">bin_counts.index.name = <span class="string">&#x27;score&#x27;</span></span><br><span class="line">plt=bin_counts.plot(kind=<span class="string">&#x27;bar&#x27;</span>, alpha=<span class="number">0.5</span>, rot=<span class="number">1</span>,width = <span class="number">0.8</span>,align=<span class="string">&#x27;center&#x27;</span>,figsize=(<span class="number">15</span>,<span class="number">4</span>))</span><br></pre></td></tr></table></figure>
+<p>生成统计图表<img src="../images/output_5_0.png" alt="png"></p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86-%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90/" rel="tag"># 数据处理,数据分析</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/07/26/2017-07-26-CMake-%E6%9E%84%E5%BB%BA%E9%A1%B9%E7%9B%AE%E6%95%99%E7%A8%8B/" rel="prev" title="CMake 构建项目教程">
+                  <i class="fa fa-chevron-left"></i> CMake 构建项目教程
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/12/21/%E4%BA%A7%E5%93%81%E9%87%8D%E6%9E%84%E6%B3%A8%E6%84%8F/" rel="next" title="产品重构注意">
+                  产品重构注意 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cheochen</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({{ JSON.stringify(config) }});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="{{ src }}">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>

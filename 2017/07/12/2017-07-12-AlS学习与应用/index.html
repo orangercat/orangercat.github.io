@@ -1,38 +1,413 @@
-{% extends '_layout.swig' %}
-{% import '_macro/post.swig' as post_template %}
-{% import '_macro/sidebar.swig' as sidebar_template %}
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.4.0">
 
 
-{% block title %} {{ page.title }} | {{ config.title }} {% endblock %}
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-{% block page_class %}page-post-detail{% endblock %}
+<link rel="stylesheet" href="/css/main.css">
 
 
-{% block content %}
 
-  <div id="posts" class="posts-expand">
-    {{ post_template.render(page) }}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@5.15.2/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/animate.css@3.1.1/animate.min.css">
 
-    <div class="post-spread">
-      {% if theme.jiathis %}
-        {% include '_partials/share/jiathis.swig' %}
-      {% elseif theme.baidushare %}
-        {% include '_partials/share/baidushare.swig' %}
-      {% elseif theme.add_this_id %}
-        {% include '_partials/share/add-this.swig' %}
-      {% elseif theme.duoshuo_shortname and theme.duoshuo_share %}
-        {% include '_partials/share/duoshuo_share.swig' %}
-      {% endif %}
+<script class="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"orangercat.github.io","root":"/","images":"/images","scheme":"Muse","version":"8.2.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}};
+  </script>
+<meta name="description" content="参考网址:交换最小二乘 Tips:矩阵中的最大的不相关的向量的个数，就叫秩一个mn的矩阵，如果秩很低（秩r远小于m,n），则它可以拆成一个mr矩阵和一个rn矩阵之积（类似于SVD分解）。后面这两个矩阵所占用的存储空间比原来的mn矩阵小得多。 什么是ALS&amp;emsp;&amp;emsp;ALS是交替最小二乘（alternating least squares）的简称。在机器学习中，ALS特指使用交替最小二乘">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AlS学习与应用">
+<meta property="og:url" content="http://orangercat.github.io/2017/07/12/2017-07-12-AlS%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%BA%94%E7%94%A8/index.html">
+<meta property="og:site_name" content="喵窝">
+<meta property="og:description" content="参考网址:交换最小二乘 Tips:矩阵中的最大的不相关的向量的个数，就叫秩一个mn的矩阵，如果秩很低（秩r远小于m,n），则它可以拆成一个mr矩阵和一个rn矩阵之积（类似于SVD分解）。后面这两个矩阵所占用的存储空间比原来的mn矩阵小得多。 什么是ALS&amp;emsp;&amp;emsp;ALS是交替最小二乘（alternating least squares）的简称。在机器学习中，ALS特指使用交替最小二乘">
+<meta property="og:locale">
+<meta property="article:published_time" content="2017-07-12T02:54:43.000Z">
+<meta property="article:modified_time" content="2017-07-26T13:28:19.000Z">
+<meta property="article:author" content="cheochen">
+<meta property="article:tag" content="ALS">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://orangercat.github.io/2017/07/12/2017-07-12-AlS%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%BA%94%E7%94%A8/">
+
+
+<script class="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-Hans'
+  };
+</script>
+<title>AlS学习与应用 | 喵窝</title>
+  
+
+
+
+
+  <noscript>
+  <style>
+  body { margin-top: 2rem; }
+
+  .use-motion .menu-item,
+  .use-motion .sidebar,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header {
+    visibility: visible;
+  }
+
+  .use-motion .header,
+  .use-motion .site-brand-container .toggle,
+  .use-motion .footer { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle,
+  .use-motion .custom-logo-image {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line {
+    transform: scaleX(1);
+  }
+
+  .search-pop-overlay, .sidebar-nav { display: none; }
+  .sidebar-panel { display: block; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
     </div>
   </div>
 
-{% endblock %}
+  <div class="site-meta">
 
-{% block sidebar %}
-  {{ sidebar_template.render(true) }}
-{% endblock %}
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <h1 class="site-title">喵窝</h1>
+      <i class="logo-line"></i>
+    </a>
+      <p class="site-subtitle" itemprop="description">Nice to see u</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
 
 
-{% block script_extra %}
-  {% include '_scripts/pages/post-details.swig' %}
-{% endblock %}
+
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#Tips"><span class="nav-number">1.</span> <span class="nav-text">Tips:</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFALS"><span class="nav-number"></span> <span class="nav-text">什么是ALS</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Spark%E4%B8%ADALS%E7%9A%84%E5%AE%9E%E7%8E%B0%E5%8E%9F%E7%90%86"><span class="nav-number"></span> <span class="nav-text">Spark中ALS的实现原理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">介绍</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%9A%90%E5%BC%8F%E5%8F%8D%E9%A6%88%E6%A8%A1%E5%9E%8B"><span class="nav-number"></span> <span class="nav-text">隐式反馈模型</span></a></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">cheochen</p>
+  <div class="site-description" itemprop="description">learn more, try more, do more.</div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives">
+          <span class="site-state-item-count">30</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">12</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">28</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-Hans">
+    <link itemprop="mainEntityOfPage" href="http://orangercat.github.io/2017/07/12/2017-07-12-AlS%E5%AD%A6%E4%B9%A0%E4%B8%8E%E5%BA%94%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="cheochen">
+      <meta itemprop="description" content="learn more, try more, do more.">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="喵窝">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          AlS学习与应用
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2017-07-12 10:54:43" itemprop="dateCreated datePublished" datetime="2017-07-12T10:54:43+08:00">2017-07-12</time>
+    </span>
+      <span class="post-meta-item">
+        <span class="post-meta-item-icon">
+          <i class="far fa-calendar-check"></i>
+        </span>
+        <span class="post-meta-item-text">Edited on</span>
+        <time title="Modified: 2017-07-26 21:28:19" itemprop="dateModified" datetime="2017-07-26T21:28:19+08:00">2017-07-26</time>
+      </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/Python/" itemprop="url" rel="index"><span itemprop="name">Python</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p><script type="text/javascript" async
+  src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-MML-AM_CHTML"><br></script><br>参考网址:<br><a target="_blank" rel="noopener" href="https://github.com/endymecy/spark-ml-source-analysis/blob/master/%E6%8E%A8%E8%8D%90/ALS.md">交换最小二乘</a></p>
+<h5 id="Tips"><a href="#Tips" class="headerlink" title="Tips:"></a>Tips:</h5><p><strong>矩阵中的最大的不相关的向量的个数，就叫秩</strong><br>一个m<em>n的矩阵，如果秩很低（秩r远小于m,n），则它可以拆成一个m</em>r矩阵和一个r<em>n矩阵之积（类似于SVD分解）。后面这两个矩阵所占用的存储空间比原来的m</em>n矩阵小得多。</p>
+<h4 id="什么是ALS"><a href="#什么是ALS" class="headerlink" title="什么是ALS"></a>什么是ALS</h4><p>&emsp;&emsp;<code>ALS</code>是交替最小二乘（alternating least squares）的简称。在机器学习中，ALS特指使用交替最小二乘求解的一个协同推荐算法。它通过观察到的所有用户给商品的打分，来推断每个用户的喜好并向用户推荐适合的商品。这就是一个有m个的U(用户),与n个V(商品)的矩阵.</p>
+<span id="more"></span>
+<p>&emsp;&emsp;<code>ALS</code>的核心就是这样一个假设：<strong>打分矩阵是近似低秩的。换句话说，就是一个<code>m*n</code>的打分矩阵可以由分解的两个小矩阵<code>U（m*k）</code>和<code>V（k*n）</code>的乘积来近似，即$A=U{V}^{T},k &lt;= m,n$。这就是<code>ALS</code>的矩阵分解方法。</strong>这样我们把系统的自由度从<code>O(mn)</code>降到了<code>O((m+n)k)</code>。</p>
+<p>&emsp;&emsp;我们把某个人的喜好映射到了低维向量<code>ui</code>上，同时将某个影片的特征映射到了维度相同的向量<code>vj</code>上，那么这个人和这个影片的相似度就可以表述成这两个向量之间的内积$$u_{i}^{T}v_{j}$ 。我们把打分理解成相似度，<strong>那么打分矩阵A就可以由用户喜好矩阵和产品特征矩阵的乘积$ U{V}^{T} $来近似了</strong>。</p>
+<p>&emsp;&emsp;低维空间的选取是一个问题。这个低维空间要能够很好的区分事物，那么就需要一个明确的可量化目标，这就是重构误差。在<code>ALS</code>中我们使用F范数来量化重构误差，就是每个元素重构误差的平方和。这里存在一个问题，我们只观察到部分打分，<code>A</code>中的大量未知元是我们想推断的，所以这个重构误差是包含未知数的。<br>解决方案很简单：只计算已知打分的重构误差:</p>
+<p>$$ \sum_{i,j\in R}(a_ij - u_iv_j^T)^2 $$</p>
+<h4 id="Spark中ALS的实现原理"><a href="#Spark中ALS的实现原理" class="headerlink" title="Spark中ALS的实现原理"></a>Spark中ALS的实现原理</h4><p>&emsp;&emsp;<code>Spark</code>利用交换最小二乘解决矩阵分解问题分两种情况：数据集是显式反馈和数据集是隐式反馈。由于隐式反馈算法的原理是在显示反馈算法原理的基础上作的修改，所以我们在此只会具体讲解数据集为隐式反馈的算法。</p>
+<h5 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h5><p>&emsp;&emsp;从广义上讲，推荐系统基于两种不同的策略：基于内容的方法和基于协同过滤的方法。<code>Spark</code>中使用协同过滤的方式。协同过滤分析用户以及用户相关的产品的相关性，用以识别新的用户-产品相关性。<strong>协同过滤系统需要的唯一信息是用户过去的行为信息</strong>，比如对产品的评价信息。协同过滤是领域无关的，所以它可以方便解决基于内容方法难以解决的许多问题。</p>
+<p>&emsp;&emsp;推荐系统依赖不同类型的输入数据，最方便的是高质量的显式反馈数据，它们包含用户对感兴趣商品明确的评价。例如，<code>Netflix</code>收集的用户对电影评价的星星等级数据。但是显式反馈数据不一定总是找得到，因此推荐系统可以从更丰富的隐式反馈信息中推测用户的偏好。</p>
+<p>隐式反馈类型包括购买历史、浏览历史、搜索模式甚至鼠标动作。例如，购买同一个作者许多书的用户可能喜欢这个作者。</p>
+<p>&emsp;&emsp;许多研究都集中在处理显式反馈，然而在很多应用场景下，应用程序重点关注隐式反馈数据。因为可能用户不愿意评价商品或者由于系统限制我们不能收集显式反馈数据。在隐式模型中，一旦用户允许收集可用的数据，在客户端并不需要额外的显式数据。文献中的系统避免主动地向用户收集显式反馈信息，所以系统仅仅依靠隐式信息。</p>
+<p>&emsp;&emsp;了解隐式反馈的特点非常重要，因为这些特质使我们避免了直接调用基于显式反馈的算法。最主要的特点有如下几种：</p>
+<ul>
+<li><p>（1）    没有负反馈。通过观察用户行为，我们可以推测那个商品他可能喜欢，然后购买，但是我们很难推测哪个商品用户不喜欢。这在显式反馈算法中并不存在，因为用户明确告诉了我们哪些他喜欢哪些他不喜欢。</p>
+</li>
+<li><p>（2）    隐式反馈是内在的噪音。虽然我们拼命的追踪用户行为，但是我们仅仅只是猜测他们的偏好和真实动机。例如，我们可能知道一个人的购买行为，但是这并不能完全说明偏好和动机，因为这个商品可能作为礼物被购买而用户并不喜欢它。</p>
+</li>
+<li><p>（3）    显示反馈的数值值表示偏好（<code>preference</code>），隐式回馈的数值值表示信任（<code>confidence</code>）。基于显示反馈的系统用星星等级让用户表达他们的喜好程度，例如一颗星表示很不喜欢，五颗星表示非常喜欢。基于隐式反馈的数值值描述的是动作的频率，例如用户购买特定商品的次数。一个较大的值并不能表明更多的偏爱。但是这个值是有用的，它描述了在一个特定观察中的信任度。<br>一个发生一次的事件可能对用户偏爱没有用，但是一个周期性事件更可能反映一个用户的选择。</p>
+</li>
+<li><p>（4）    评价隐式反馈推荐系统需要合适的手段。</p>
+</li>
+</ul>
+<h4 id="隐式反馈模型"><a href="#隐式反馈模型" class="headerlink" title="隐式反馈模型"></a>隐式反馈模型</h4><p>&emsp;&emsp;在显式反馈的基础上，我们需要做一些改动得到我们的隐式反馈模型。首先，我们需要形式化由$r_{ij}$变量衡量的信任度的概念。我们引入了一组二元变量$p_{ij}$ ，它表示用户<code>u</code>对商品<code>v</code>的偏好。$p_{ij}$的公式如下：</p>
+<p>$$p_{ij}=\left{<br>    \begin{array}{ll}<br>        1 &amp;\mbox{$r_{ij}&gt; 0$}\<br>        0 &amp;\mbox{$r_{ij}$=0}<br>    \end{array}<br>    \right.$$</p>
+<p>&emsp;&emsp;换句话说，如果用户购买了商品，我们认为用户喜欢该商品，否则我们认为用户不喜欢该商品。然而我们的信念（<code>beliefs</code>）与变化的信任（<code>confidence</code>）等级息息相关。首先，很自然的，$p_{ij}$的值为0和低信任有关。用户对一个商品没有得到一个正的偏好可能源于多方面的原因，并不一定是不喜欢该商品。例如，用户可能并不知道该商品的存在。<br>另外，用户购买一个商品也并不一定是用户喜欢它。因此我们需要一个新的信任等级来显示用户偏爱某个商品。一般情况下，$r_{ij}$越大，越能暗示用户喜欢某个商品。因此，我们引入了一组变量$c_{ij}$，它衡量了我们观察到$p_{ij}$的信任度。$c_{ij}$一个合理的选择如下所示：</p>
+<p>$$c_{ij} = 1 + \alpha r_{ij}$$</p>
+<p>&emsp;&emsp;按照这种方式，我们存在最小限度的信任度，并且随着我们观察到的正偏向的证据越来越多，信任度也会越来越大。</p>
+<p>&emsp;&emsp;我们的目的是找到用户向量<code>ui</code>以及商品向量<code>vj</code>来表明用户偏好。这些向量分别是用户因素（特征）向量和商品因素（特征）向量。本质上，这些向量将用户和商品映射到一个公用的隐式因素空间，从而使它们可以直接比较。这和用于显式数据集的矩阵分解技术类似，但是包含两点不一样的地方：<br>（1）我们需要考虑不同的信任度，（2）最优化需要考虑所有可能的<code>u，v</code>对，而不仅仅是和观察数据相关的<code>u，v</code>对。显性反馈的矩阵分解优化时，对于<code>missing data</code>(没有评分)，是不会当做训练数据输入到模型的，优化时针对已知评分数据优化。而这里隐性反馈，是利用所有可能的<code>u</code>,<code>i</code>键值对，所以总的数据是<code>m*n</code>，其中<code>m</code>是用户数量，<code>n</code>是物品数量。这里没有所谓的<code>missing data</code>，因为假如<code>u</code>对<code>i</code>没有任何动作，我们就认为偏好值为0，只不过置信度较低而已。因此，通过最小化下面的损失函数来计算相关因素（<code>factors</code>）。</p>
+<p>$$ min_{u,v}\sum <em>{i,j}c</em>{ij}(p_{ij}-u_{i}^{T}v_{j})^{2} + \lambda (\sum_{i}\left | u_{i} \right |^{2} + \sum_{j}\left | v_{j} \right |^{2}) $$</p>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/ALS/" rel="tag"># ALS</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2017/04/29/2017-04-29-Resilio-BtSync-%E6%90%AD%E5%BB%BA/" rel="prev" title="Resilio(BtSync)搭建">
+                  <i class="fa fa-chevron-left"></i> Resilio(BtSync)搭建
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2017/07/26/2017-07-26-CMake-%E6%9E%84%E5%BB%BA%E9%A1%B9%E7%9B%AE%E6%95%99%E7%A8%8B/" rel="next" title="CMake 构建项目教程">
+                  CMake 构建项目教程 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      const activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      const commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">cheochen</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.1/lib/anime.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({{ JSON.stringify(config) }});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="{{ src }}">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+</body>
+</html>
